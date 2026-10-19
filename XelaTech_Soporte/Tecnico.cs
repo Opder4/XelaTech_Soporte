@@ -37,6 +37,44 @@ namespace XelaTech_Soporte
             CalificacionPromedio = 0;
         }
 
+        public void MostrarInformacion()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("ID: ");
+            Console.ResetColor();
+            Console.Write(Codigo);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Nombre: ");
+            Console.ResetColor();
+            Console.Write(NombreCompleto);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Especialidad: ");
+            Console.ResetColor();
+            Console.Write(Especialidad);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Estado: ");
+            Console.ResetColor();
+            Console.Write(Estado);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Trabajos Activos: ");
+            Console.ResetColor();
+            Console.Write(TrabajosActivos);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Servicios Finalizados: ");
+            Console.ResetColor();
+            Console.Write(ServiciosFinalizados);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Calificación Promedio: ");
+            Console.ResetColor();
+            Console.Write(CalificacionPromedio);
+        }
+
         public void AsignarTrabajo()
         {
             // Por confirmar entrada y proceso
