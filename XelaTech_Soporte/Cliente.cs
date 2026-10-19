@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace XelaTech_Soporte
 {
+    public enum TipoCliente { Estudiante = 1, PersonaComun = 2, negocioPequeno = 3, Institucion = 4 };
+
     internal class Cliente
     {
-        public enum TipoCliente { Estudiante = 1, PersonaComun = 2, negocioPequeno = 3, Institucion = 4};
-
 		private string codigo;
 
 		private string nombreCompleto;
