@@ -10,7 +10,7 @@ namespace XelaTech_Soporte
 
     public enum EstadoTecnico { Disponible = 1, Ocupado = 2, Inactivo = 3 }
 
-    internal class Tecnico
+    public class Tecnico
     {
         private string codigo;
 

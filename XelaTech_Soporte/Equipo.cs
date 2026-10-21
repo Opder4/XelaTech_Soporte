@@ -8,38 +8,38 @@ namespace XelaTech_Soporte
 {
     public enum TipoEquipo { Laptop = 1, PCEscritorio = 2, Impresora = 3 };
 
-    internal class Equipo
+    public class Equipo
     {
-		private string codigo;
+        private string codigo;
 
-		private string numeroSerie;
+        private string numeroSerie;
 
-		private string marca;
+        private string marca;
 
-		private string modelo;
+        private string modelo;
 
-		private Cliente propietario;
+        private Cliente propietario;
 
-		private TipoEquipo tipoEquipo;
+        private TipoEquipo tipoEquipo;
 
-		private string estadoFisico;
+        private string estadoFisico;
 
-		private string accesorios;
+        private string accesorios;
 
-		public Equipo(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios)
-		{
-			Codigo = codigo;
-			NumeroSerie = numeroSerie;
-			Marca = marca;
-			Modelo = modelo;
-			Propietario = propietario;
-			TipoEquipo = tipoEquipo;
-			EstadoFisico = estadoFisico;
-			Accesorios = accesorios;
-		}
+        public Equipo(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios)
+        {
+            Codigo = codigo;
+            NumeroSerie = numeroSerie;
+            Marca = marca;
+            Modelo = modelo;
+            Propietario = propietario;
+            TipoEquipo = tipoEquipo;
+            EstadoFisico = estadoFisico;
+            Accesorios = accesorios;
+        }
 
-		public void MostrarDetalles()
-		{
+        public void MostrarDetalles()
+        {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("ID: ");
             Console.ResetColor();
@@ -81,57 +81,120 @@ namespace XelaTech_Soporte
             Console.Write(Accesorios);
         }
 
-		public virtual void CalcularCostoRevision()
-		{
-           // Por definir en las clases hijas
-		}
-
-		public string Accesorios
-		{
-			get { return accesorios; }
-			set { accesorios = value; }
-		}
-
-		public string EstadoFisico
+        public virtual double CalcularCostoRevision()
         {
-			get { return estadoFisico; }
-			set { estadoFisico = value; }
-		}
+            return 0;
+        }
 
-		public TipoEquipo TipoEquipo
-		{
-			get { return tipoEquipo; }
-			set { tipoEquipo = value; }
-		}
+        public string Accesorios
+        {
+            get { return accesorios; }
+            set { accesorios = value; }
+        }
 
-		public Cliente Propietario
-		{
-			get { return propietario; }
-			set { propietario = value; }
-		}
+        public string EstadoFisico
+        {
+            get { return estadoFisico; }
+            set { estadoFisico = value; }
+        }
 
-		public string Modelo
-		{
-			get { return modelo; }
-			set { modelo = value; }
-		}
+        public TipoEquipo TipoEquipo
+        {
+            get { return tipoEquipo; }
+            set { tipoEquipo = value; }
+        }
 
-		public string Marca
-		{
-			get { return marca; }
-			set { marca = value; }
-		}
+        public Cliente Propietario
+        {
+            get { return propietario; }
+            set { propietario = value; }
+        }
 
-		public string NumeroSerie
-		{
-			get { return numeroSerie; }
-			set { numeroSerie = value; }
-		}
+        public string Modelo
+        {
+            get { return modelo; }
+            set { modelo = value; }
+        }
 
-		public string Codigo
-		{
-			get { return codigo; }
-			set { codigo = value; }
-		}
-	}
+        public string Marca
+        {
+            get { return marca; }
+            set { marca = value; }
+        }
+
+        public string NumeroSerie
+        {
+            get { return numeroSerie; }
+            set { numeroSerie = value; }
+        }
+
+        public string Codigo
+        {
+            get { return codigo; }
+            set { codigo = value; }
+        }
+    }
+
+    class Laptop : Equipo
+    {
+        private bool incluyeCargador;
+
+        public Laptop(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, bool incluyeCargador) : base(codigo, numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
+        {
+            IncluyeCargador = incluyeCargador;
+        }
+
+        public override double CalcularCostoRevision()
+        {
+            return 150;
+        }
+        public bool IncluyeCargador
+        {
+            get { return incluyeCargador; }
+            set { incluyeCargador = value; }
+        }
+
+    }
+
+    class ComputadoraEscritorio : Equipo
+    {
+        private string formatoGabinete;
+
+        public ComputadoraEscritorio(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, string formatoGabinete) : base(codigo, numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
+        {
+            FormatoGabinete = formatoGabinete;
+        }
+
+        public override double CalcularCostoRevision()
+        {
+            return 200;
+        }
+        public string FormatoGabinete
+        {
+            get { return formatoGabinete; }
+            set { formatoGabinete = value; }
+        }
+
+    }
+
+    class Impresora : Equipo
+    {
+        private string tipoImpresion;
+
+        public Impresora(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, string tipoImpresion) : base(codigo, numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
+        {
+            TipoImpresion = tipoImpresion;
+        }
+
+        public override double CalcularCostoRevision()
+        {
+            return 150;
+        }
+        public string TipoImpresion
+        {
+            get { return tipoImpresion; }
+            set { tipoImpresion = value; }
+        }
+
+    }
 }
