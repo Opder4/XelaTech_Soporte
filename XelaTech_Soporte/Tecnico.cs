@@ -131,6 +131,5 @@ namespace XelaTech_Soporte
             get { return codigo; }
             set { codigo = value; }
         }
-
     }
 }

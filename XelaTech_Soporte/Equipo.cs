@@ -235,6 +235,5 @@ namespace XelaTech_Soporte
             get { return tipoImpresion; }
             set { tipoImpresion = value; }
         }
-
     }
 }
