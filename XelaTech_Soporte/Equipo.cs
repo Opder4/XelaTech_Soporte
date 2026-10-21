@@ -63,7 +63,7 @@ namespace XelaTech_Soporte
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Propietario: ");
             Console.ResetColor();
-            Console.Write(Propietario.NombreCompleto);
+            Console.Write(Propietario.NombreCompleto + $" | {Propietario.Telefono} | {Propietario.Codigo}");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Tipo de Equipo: ");
