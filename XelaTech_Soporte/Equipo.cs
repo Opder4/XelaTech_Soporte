@@ -38,7 +38,7 @@ namespace XelaTech_Soporte
             Accesorios = accesorios;
         }
 
-        public void MostrarDetalles()
+        public virtual void MostrarDetalles()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("ID: ");
@@ -148,6 +148,24 @@ namespace XelaTech_Soporte
         {
             return 150;
         }
+
+        public override void MostrarDetalles()
+        {
+            base.MostrarDetalles();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("¿Incluye Cargador?: ");
+            Console.ResetColor();
+            if (IncluyeCargador == true)
+            {
+                Console.Write("Si");
+            }
+            else
+            {
+                Console.Write("No");
+            }
+        }
+
         public bool IncluyeCargador
         {
             get { return incluyeCargador; }
@@ -169,6 +187,17 @@ namespace XelaTech_Soporte
         {
             return 200;
         }
+
+        public override void MostrarDetalles()
+        {
+            base.MostrarDetalles();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Formato del Gabinete: ");
+            Console.ResetColor();
+            Console.Write(FormatoGabinete);
+        }
+
         public string FormatoGabinete
         {
             get { return formatoGabinete; }
@@ -190,6 +219,17 @@ namespace XelaTech_Soporte
         {
             return 150;
         }
+
+        public override void MostrarDetalles()
+        {
+            base.MostrarDetalles();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Tipo de Impresion: ");
+            Console.ResetColor();
+            Console.Write(TipoImpresion);
+        }
+
         public string TipoImpresion
         {
             get { return tipoImpresion; }
