@@ -25,14 +25,14 @@ namespace XelaTech_Soporte
 
 		private int[] calificaciones;
 
-		public XelaTech(int cantidadMaximaTecnicos)
+		public XelaTech()
 		{
 			listaClientes = new List<Cliente>();
 			listaTecnicos = new List<Tecnico>();
 			listaEquipos = new List<Equipo>();
 			colaNormal = new Queue<Solicitud>();
 			colaUrgente = new Queue<Solicitud>();
-			matrizCargaSemanal = new int[cantidadMaximaTecnicos, 6];
+			matrizCargaSemanal = new int[0, 6];
 			calificaciones = new int[5];
 		}
 
@@ -44,6 +44,16 @@ namespace XelaTech_Soporte
 		public void IngresarTecnico(Tecnico nuevoTecnico)
 		{
 			listaTecnicos.Add(nuevoTecnico);
+			int filasActuales = matrizCargaSemanal.GetLength(0);
+			int[,] nuevaMatrizCargaSemanal = new int[filasActuales, 6];
+			for (int i = 0; i < filasActuales; i++)
+			{
+				for (int j = 0; j < 6; j++)
+				{
+					nuevaMatrizCargaSemanal[i, j] = matrizCargaSemanal[i, j];
+				}
+			}
+			matrizCargaSemanal = nuevaMatrizCargaSemanal;
 		}
 
 		public void IngresarEquipo(Equipo nuevoEquipo)
