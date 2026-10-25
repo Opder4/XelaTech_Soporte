@@ -12,6 +12,8 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
+        private string prefijo;
+
         private string nombreCompleto;
 
         private string telefono;
@@ -69,6 +71,12 @@ namespace XelaTech_Soporte
         {
             get { return solicitudesRegistradas; }
             set { solicitudesRegistradas = value; }
+        }
+
+        public string Prefijo
+        {
+            get { return prefijo; }
+            set { prefijo = "CLI"; }
         }
 
         public TipoCliente TipoCCliente

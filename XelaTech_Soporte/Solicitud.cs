@@ -14,6 +14,8 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
+        private string prefijo;
+
         private Cliente cliente;
 
         private Equipo equipo;
@@ -187,6 +189,12 @@ namespace XelaTech_Soporte
         {
             get { return manoDeObra; }
             set { manoDeObra = value; }
+        }
+
+        public string Prefijo
+        {
+            get { return prefijo; }
+            set { prefijo = "SOL"; }
         }
 
         public List<Repuesto> RepuestosUsados

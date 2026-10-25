@@ -12,6 +12,8 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
+        private string prefijo;
+
         private string numeroSerie;
 
         private string marca;
@@ -90,6 +92,12 @@ namespace XelaTech_Soporte
         {
             get { return accesorios; }
             set { accesorios = value; }
+        }
+
+        public string Prefijo
+        {
+            get { return prefijo; }
+            set { prefijo = "EQP"; }
         }
 
         public string EstadoFisico

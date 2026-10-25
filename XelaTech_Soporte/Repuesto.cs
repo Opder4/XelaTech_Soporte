@@ -10,6 +10,8 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
+        private string prefijo;
+
         private string nombre;
 
         private string categoria;
@@ -40,6 +42,12 @@ namespace XelaTech_Soporte
         {
             get { return cantidadUtilizada; }
             set { cantidadUtilizada = value; }
+        }
+
+        public string Prefijo
+        {
+            get { return prefijo; }
+            set { prefijo = "REP"; }
         }
 
         public double PrecioVenta
