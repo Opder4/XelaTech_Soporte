@@ -50,6 +50,7 @@
     <Compile Include="Repuesto.cs" />
     <Compile Include="Solicitud.cs" />
     <Compile Include="Tecnico.cs" />
+    <Compile Include="XelaTech.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
