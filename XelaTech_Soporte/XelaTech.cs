@@ -4,22 +4,23 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static XelaTech_Soporte.CodigoUnico;
 
 namespace XelaTech_Soporte
 {
     public class XelaTech
     {
-		private List<Cliente> listaClientes;
+		private List<Cliente> listaClientes = new List<Cliente>();
 
-		private List<Tecnico> listaTecnicos;
+		private List<Tecnico> listaTecnicos = new List<Tecnico>();
 
-		private List<Equipo> listaEquipos;
+		private List<Equipo> listaEquipos = new List<Equipo>();
 
-		private Queue<Solicitud> colaNormal;
+		private Queue<Solicitud> colaNormal = new Queue<Solicitud>();
 
-		private Queue<Solicitud> colaUrgente;
+		private Queue<Solicitud> colaUrgente = new Queue<Solicitud>();
 
-		private List<Repuesto> listaRepuestos;
+		private List<Repuesto> listaRepuestos = new List<Repuesto>();
 
 		private int[,] matrizCargaSemanal;
 
@@ -38,12 +39,16 @@ namespace XelaTech_Soporte
 
 		public void IngresarCliente(Cliente nuevoCliente)
 		{
+			string codigoUnico = GenerarCodigoUnico(nuevoCliente.Prefijo);
+			nuevoCliente.Codigo = codigoUnico;
 			listaClientes.Add(nuevoCliente);
 		}
 
 		public void IngresarTecnico(Tecnico nuevoTecnico)
 		{
-			listaTecnicos.Add(nuevoTecnico);
+            string codigoUnico = GenerarCodigoUnico(nuevoTecnico.Prefijo);
+            nuevoTecnico.Codigo = codigoUnico;
+            listaTecnicos.Add(nuevoTecnico);
 			int filasActuales = matrizCargaSemanal.GetLength(0);
 			int[,] nuevaMatrizCargaSemanal = new int[filasActuales, 6];
 			for (int i = 0; i < filasActuales; i++)
@@ -58,12 +63,16 @@ namespace XelaTech_Soporte
 
 		public void IngresarEquipo(Equipo nuevoEquipo)
 		{
-			listaEquipos.Add(nuevoEquipo);
+            string codigoUnico = GenerarCodigoUnico(nuevoEquipo.Prefijo);
+            nuevoEquipo.Codigo = codigoUnico;
+            listaEquipos.Add(nuevoEquipo);
 		}
 
 		public void IngresarSolicitud(Solicitud nuevaSolicitud)
 		{
-			if (nuevaSolicitud.Prioridad == PrioridadSolicitud.Urgente)
+            string codigoUnico = GenerarCodigoUnico(nuevaSolicitud.Prefijo);
+            nuevaSolicitud.Codigo = codigoUnico;
+            if (nuevaSolicitud.Prioridad == PrioridadSolicitud.Urgente)
 			{
 				colaUrgente.Enqueue(nuevaSolicitud);
 			}
@@ -75,7 +84,9 @@ namespace XelaTech_Soporte
 
 		public void IngresarRepuesto(Repuesto nuevoRepuesto)
 		{
-			listaRepuestos.Add(nuevoRepuesto);
+            string codigoUnico = GenerarCodigoUnico(nuevoRepuesto.Prefijo);
+            nuevoRepuesto.Codigo = codigoUnico;
+            listaRepuestos.Add(nuevoRepuesto);
 		}
 
 		public int[] Calificaciones

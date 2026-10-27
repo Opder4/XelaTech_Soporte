@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using XelaTech_Soporte;
 
 namespace XelaTech_Soporte
 {
@@ -17,6 +18,131 @@ namespace XelaTech_Soporte
             DescriptionAttribute attribute = field?.GetCustomAttribute<DescriptionAttribute>();
 
             return attribute != null ? attribute.Description : valor.ToString();
+        }
+
+        public static string ObtenerTipoCliente(TipoCliente tipoCliente)
+        {
+            switch (tipoCliente)
+            {
+                case TipoCliente.Estudiante:
+                    return "Estudiante";
+                case TipoCliente.PersonaComun:
+                    return "Persona Común";
+                case TipoCliente.negocioPequeno:
+                    return "Pequeño Negocio";
+                case TipoCliente.Institucion:
+                    return "Institución";
+                default:
+                    return tipoCliente.ToString();
+            }
+        }
+
+        public static int MenuTipoDeCliente()
+        {
+            string mensajeSolicitud = "Elija su Tipo de Cliente";
+            int numeroElegido;
+
+            List<string> listaTipos = Enum.GetValues(typeof(TipoCliente))
+                                   .Cast<TipoCliente>()
+                                   .Select(m => ObtenerTipoCliente(m))
+                                   .ToList();
+
+            int anchoConsola = Console.WindowWidth;
+            int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
+            if (espacios < 0) espacios = 0;
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
+            Console.ResetColor();
+            Console.Write("\n\n");
+
+            StringBuilder sbTipo = new StringBuilder(1, 1);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Ingrese el número correspondiente\n");
+            Console.ResetColor();
+
+            foreach (string tipo in listaTipos)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write($"{listaTipos.IndexOf(tipo) + 1}. ");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($"{tipo}");
+                Console.ResetColor();
+                Console.WriteLine();
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("\nElección: ");
+            Console.ResetColor();
+
+            do
+            {
+                ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+
+                if (teclaInfo.Key == ConsoleKey.Enter && sbTipo.Length == 1)
+                {
+                    numeroElegido = int.Parse(sbTipo.ToString());
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write($"\n\nConfirmar elección de ");
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(listaTipos[numeroElegido - 1]);
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" (Yes/No): ");
+                    Console.ResetColor();
+
+                    string respuesta = Console.ReadLine().ToLower().Trim();
+
+                    if (respuesta == "no")
+                    {
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuTipoDeCliente(); 
+                    }
+                    else if (respuesta == "yes")
+                    {
+                        Console.Clear();
+                        break; 
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nElección inválida");
+                        Console.ResetColor();
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuTipoDeCliente();
+                    }
+                }
+
+                if (teclaInfo.Key == ConsoleKey.Backspace && sbTipo.Length > 0)
+                {
+                    sbTipo.Remove(sbTipo.Length - 1, 1);
+                    Console.Write("\b \b");
+                }
+
+                if (sbTipo.Length < 1)
+                {
+                    if (char.IsDigit(teclaInfo.KeyChar))
+                    {
+                        int numeroConvertido = int.Parse(teclaInfo.KeyChar.ToString());
+                        if (numeroConvertido >= 1 && numeroConvertido <= listaTipos.Count)
+                        {
+                            sbTipo.Append(teclaInfo.KeyChar);
+                            Console.Write(teclaInfo.KeyChar);
+                        }
+                    }
+                }
+            } while (true);
+
+            return numeroElegido;
         }
 
         internal static string ValidarTexto(string mensajeSolicitudDeDatos, int limiteCaracteres)

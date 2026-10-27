@@ -14,7 +14,7 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
-        private string prefijo;
+        private string prefijo = "TEC";
 
         private string nombreCompleto;
 
@@ -28,9 +28,8 @@ namespace XelaTech_Soporte
 
         private double calificacionPromedio;
 
-        public Tecnico(string codigo, string nombre, EspecialidadTecnico especialidad, EstadoTecnico estado)
+        public Tecnico(string nombre, EspecialidadTecnico especialidad, EstadoTecnico estado)
         {
-            Codigo = codigo;
             NombreCompleto = nombre;
             Especialidad = especialidad;
             Estado = estado;
@@ -101,7 +100,7 @@ namespace XelaTech_Soporte
         public string Prefijo
         {
             get { return prefijo; }
-            set { prefijo = "TEC"; }
+            set { prefijo = value; }
         }
 
         public int ServiciosFinalizados

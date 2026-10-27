@@ -12,11 +12,11 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
-        private string prefijo;
+        private string prefijo = "CLI";
 
         private string nombreCompleto;
 
-        private string telefono;
+        private int telefono;
 
         private string correo;
 
@@ -24,9 +24,8 @@ namespace XelaTech_Soporte
 
         private int solicitudesRegistradas;
 
-        public Cliente(string codigo, string nombre, string telefono, string correo, TipoCliente tipoCliente)
+        public Cliente(string nombre, int telefono, string correo, TipoCliente tipoCliente)
         {
-            Codigo = codigo;
             NombreCompleto = nombre;
             Telefono = telefono;
             Correo = correo;
@@ -59,12 +58,29 @@ namespace XelaTech_Soporte
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Tipo de Cliente: ");
             Console.ResetColor();
-            Console.Write(TipoCCliente);
+            Console.Write(ObtenerTipoCliente());
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Solicitudes Realizadas: ");
             Console.ResetColor();
             Console.Write(SolicitudesRegistradas);
+        }
+
+        public string ObtenerTipoCliente()
+        {
+            switch (TipoCCliente)
+            {
+                case TipoCliente.Estudiante:
+                    return "Estudiante";
+                case TipoCliente.PersonaComun:
+                    return "Persona Común";
+                case TipoCliente.negocioPequeno:
+                    return "Pequeño Negocio";
+                case TipoCliente.Institucion:
+                    return "Institución";
+                default:
+                    return TipoCCliente.ToString();
+            }
         }
 
         public int SolicitudesRegistradas
@@ -76,7 +92,7 @@ namespace XelaTech_Soporte
         public string Prefijo
         {
             get { return prefijo; }
-            set { prefijo = "CLI"; }
+            set { prefijo = value; }
         }
 
         public TipoCliente TipoCCliente
@@ -91,7 +107,7 @@ namespace XelaTech_Soporte
             set { correo = value; }
         }
 
-        public string Telefono
+        public int Telefono
         {
             get { return telefono; }
             set { telefono = value; }

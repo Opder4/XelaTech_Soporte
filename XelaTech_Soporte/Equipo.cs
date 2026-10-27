@@ -12,7 +12,7 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
-        private string prefijo;
+        private string prefijo = "EQP";
 
         private string numeroSerie;
 
@@ -28,9 +28,8 @@ namespace XelaTech_Soporte
 
         private string accesorios;
 
-        public Equipo(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios)
+        public Equipo(string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios)
         {
-            Codigo = codigo;
             NumeroSerie = numeroSerie;
             Marca = marca;
             Modelo = modelo;
@@ -97,7 +96,7 @@ namespace XelaTech_Soporte
         public string Prefijo
         {
             get { return prefijo; }
-            set { prefijo = "EQP"; }
+            set { prefijo = value; }
         }
 
         public string EstadoFisico
@@ -147,7 +146,7 @@ namespace XelaTech_Soporte
     {
         private bool incluyeCargador;
 
-        public Laptop(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, bool incluyeCargador) : base(codigo, numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
+        public Laptop(string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, bool incluyeCargador) : base(numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
         {
             IncluyeCargador = incluyeCargador;
         }
@@ -186,7 +185,7 @@ namespace XelaTech_Soporte
     {
         private string formatoGabinete;
 
-        public ComputadoraEscritorio(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, string formatoGabinete) : base(codigo, numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
+        public ComputadoraEscritorio(string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, string formatoGabinete) : base(numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
         {
             FormatoGabinete = formatoGabinete;
         }
@@ -218,7 +217,7 @@ namespace XelaTech_Soporte
     {
         private string tipoImpresion;
 
-        public Impresora(string codigo, string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, string tipoImpresion) : base(codigo, numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
+        public Impresora(string numeroSerie, string marca, string modelo, Cliente propietario, TipoEquipo tipoEquipo, string estadoFisico, string accesorios, string tipoImpresion) : base(numeroSerie, marca, modelo, propietario, tipoEquipo, estadoFisico, accesorios)
         {
             TipoImpresion = tipoImpresion;
         }

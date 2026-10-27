@@ -18,7 +18,9 @@ namespace XelaTech_Soporte
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine();
-                Console.WriteLine("====== MENÚ DE XELATECH SOPORTE ======");
+                Console.WriteLine("==================================");
+                Console.WriteLine("     MENÚ DE XELATECH SOPORTE"    );
+                Console.WriteLine("==================================");
                 Console.WriteLine();
                 Console.ResetColor();
                 Console.ForegroundColor= ConsoleColor.DarkYellow;
@@ -66,7 +68,7 @@ namespace XelaTech_Soporte
                 switch (opcionMenu)
                 {
                     case 1:
-
+                        ModuloClientes.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 2:
 

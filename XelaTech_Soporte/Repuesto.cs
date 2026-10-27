@@ -10,7 +10,7 @@ namespace XelaTech_Soporte
     {
         private string codigo;
 
-        private string prefijo;
+        private string prefijo = "REP";
 
         private string nombre;
 
@@ -26,9 +26,8 @@ namespace XelaTech_Soporte
 
         private int cantidadUtilizada;
 
-        public Repuesto(string codigo, string nombre, string categoria, int existencia, int existenciaMinima, double costoUnitario)
+        public Repuesto(string nombre, string categoria, int existencia, int existenciaMinima, double costoUnitario)
         {
-            Codigo = codigo;
             Nombre = nombre;
             Categoria = categoria;
             Existencia = existencia;
@@ -47,7 +46,7 @@ namespace XelaTech_Soporte
         public string Prefijo
         {
             get { return prefijo; }
-            set { prefijo = "REP"; }
+            set { prefijo = value; }
         }
 
         public double PrecioVenta
