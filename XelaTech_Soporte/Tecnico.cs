@@ -53,12 +53,12 @@ namespace XelaTech_Soporte
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Especialidad: ");
             Console.ResetColor();
-            Console.Write(Especialidad);
+            Console.Write(ObtenerEspecialidadTecnico());
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Estado: ");
             Console.ResetColor();
-            Console.Write(Estado);
+            Console.Write(ObtenerEstadoTecnico());
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Trabajos Activos: ");
@@ -74,6 +74,28 @@ namespace XelaTech_Soporte
             Console.Write("Calificación Promedio: ");
             Console.ResetColor();
             Console.Write(CalificacionPromedio);
+        }
+
+        public string ObtenerEspecialidadTecnico()
+        {
+            switch (Especialidad)
+            {
+                case EspecialidadTecnico.Impresoras: return "Impresoras";
+                case EspecialidadTecnico.Laptop: return "Laptop";
+                case EspecialidadTecnico.PCEscritorio: return "PC de escritorio";
+                default: return Especialidad.ToString();
+            }
+        }
+
+        public string ObtenerEstadoTecnico()
+        {
+            switch (Estado)
+            {
+                case EstadoTecnico.Disponible: return "Disponible";
+                case EstadoTecnico.Inactivo: return "No disponible";
+                case EstadoTecnico.Ocupado: return "Ocupado";
+                default: return Estado.ToString();
+            }
         }
 
         public void AsignarTrabajo()

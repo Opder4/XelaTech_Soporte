@@ -145,6 +145,239 @@ namespace XelaTech_Soporte
             return numeroElegido;
         }
 
+        public static string ObtenerEspecialidadTecnico(EspecialidadTecnico especialidad)
+        {
+            switch (especialidad)
+            {
+                case EspecialidadTecnico.Impresoras: return "Impresoras";
+                case EspecialidadTecnico.Laptop: return "Laptop";
+                case EspecialidadTecnico.PCEscritorio: return "PC de escritorio";
+                default: return especialidad.ToString();
+            }
+        }
+
+        public static int MenuEspecialidadTecnico()
+        {
+            string mensajeSolicitud = "Elija la Especialidad del Técnico";
+            int numeroElegido;
+
+            List<string> listaEspecialidades = Enum.GetValues(typeof(EspecialidadTecnico))
+                                   .Cast<EspecialidadTecnico>()
+                                   .Select(m => ObtenerEspecialidadTecnico(m))
+                                   .ToList();
+
+            int anchoConsola = Console.WindowWidth;
+            int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
+            if (espacios < 0) espacios = 0;
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
+            Console.ResetColor();
+            Console.Write("\n\n");
+
+            StringBuilder sbEspecialidad = new StringBuilder(1, 1);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Ingrese el número correspondiente:\n");
+            Console.ResetColor();
+
+            for (int i = 0; i < listaEspecialidades.Count; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write($"{i + 1}. ");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(listaEspecialidades[i]);
+                Console.ResetColor();
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("\nElección: ");
+            Console.ResetColor();
+
+            do
+            {
+                ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+
+                if (teclaInfo.Key == ConsoleKey.Enter && sbEspecialidad.Length == 1)
+                {
+                    numeroElegido = int.Parse(sbEspecialidad.ToString());
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("\n\nConfirmar elección de ");
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(listaEspecialidades[numeroElegido - 1]);
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" (Yes/No): ");
+                    Console.ResetColor();
+
+                    string respuesta = Console.ReadLine().ToLower().Trim();
+
+                    if (respuesta == "no")
+                    {
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuEspecialidadTecnico();
+                    }
+                    else if (respuesta == "yes")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nElección inválida");
+                        Console.ResetColor();
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuEspecialidadTecnico();
+                    }
+                }
+
+                if (teclaInfo.Key == ConsoleKey.Backspace && sbEspecialidad.Length > 0)
+                {
+                    sbEspecialidad.Remove(sbEspecialidad.Length - 1, 1);
+                    Console.Write("\b \b");
+                }
+
+                if (sbEspecialidad.Length < 1 && char.IsDigit(teclaInfo.KeyChar))
+                {
+                    int numeroConvertido = int.Parse(teclaInfo.KeyChar.ToString());
+                    if (numeroConvertido >= 1 && numeroConvertido <= listaEspecialidades.Count)
+                    {
+                        sbEspecialidad.Append(teclaInfo.KeyChar);
+                        Console.Write(teclaInfo.KeyChar);
+                    }
+                }
+            } while (true);
+
+            return numeroElegido;
+        }
+
+        public static string ObtenerEstadoTecnico(EstadoTecnico estado)
+        {
+            switch (estado)
+            {
+                case EstadoTecnico.Disponible: return "Disponible";
+                case EstadoTecnico.Inactivo: return "No disponible";
+                default: return estado.ToString();
+            }
+        }
+
+        public static int MenuEstadoTecnico()
+        {
+            string mensajeSolicitud = "Elija el Estado del Técnico";
+            int numeroElegido;
+
+            List<EstadoTecnico> listaEstados = Enum.GetValues(typeof(EstadoTecnico))
+                                   .Cast<EstadoTecnico>()
+                                   .Where(m => m != EstadoTecnico.Ocupado)
+                                   .ToList();
+
+            List<string> listaNombres = listaEstados
+                           .Select(m => ObtenerEstadoTecnico(m))
+                           .ToList();
+
+            int anchoConsola = Console.WindowWidth;
+            int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
+            if (espacios < 0) espacios = 0;
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
+            Console.ResetColor();
+            Console.Write("\n\n");
+
+            StringBuilder sbEstado = new StringBuilder(1, 1);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Ingrese el número correspondiente:\n");
+            Console.ResetColor();
+
+            for (int i = 0; i < listaNombres.Count; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write($"{i + 1}. ");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(listaEstados[i]);
+                Console.ResetColor();
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("\nElección: ");
+            Console.ResetColor();
+
+            do
+            {
+                ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+
+                if (teclaInfo.Key == ConsoleKey.Enter && sbEstado.Length == 1)
+                {
+                    numeroElegido = int.Parse(sbEstado.ToString());
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("\n\nConfirmar elección de ");
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(listaEstados[numeroElegido - 1]);
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" (Yes/No): ");
+                    Console.ResetColor();
+
+                    string respuesta = Console.ReadLine().ToLower().Trim();
+
+                    if (respuesta == "no")
+                    {
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuEstadoTecnico();
+                    }
+                    else if (respuesta == "yes")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nElección inválida");
+                        Console.ResetColor();
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuEstadoTecnico();
+                    }
+                }
+
+                if (teclaInfo.Key == ConsoleKey.Backspace && sbEstado.Length > 0)
+                {
+                    sbEstado.Remove(sbEstado.Length - 1, 1);
+                    Console.Write("\b \b");
+                }
+
+                if (sbEstado.Length < 1 && char.IsDigit(teclaInfo.KeyChar))
+                {
+                    int numeroConvertido = int.Parse(teclaInfo.KeyChar.ToString());
+                    if (numeroConvertido >= 1 && numeroConvertido <= listaEstados.Count)
+                    {
+                        sbEstado.Append(teclaInfo.KeyChar);
+                        Console.Write(teclaInfo.KeyChar);
+                    }
+                }
+            } while (true);
+
+            return numeroElegido;
+        }
+
         internal static string ValidarTexto(string mensajeSolicitudDeDatos, int limiteCaracteres)
         {
             bool textoConfirmado = false;
@@ -498,6 +731,110 @@ namespace XelaTech_Soporte
                 } while (true);
             }
             return numeroFinal;
+        }
+
+        internal static int ValidarNumericoSinLimpiarConsola(int tamanoRequerido, Action menuMostrar, int rangoValido)
+        {
+            bool numeroConfirmado = false;
+            int numeroFinal = 0;
+            menuMostrar();
+
+            while (!numeroConfirmado)
+            {
+                int posicionInicial = Console.CursorTop;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("\n Ingresar: ");
+                Console.ResetColor();
+
+                StringBuilder sb = new StringBuilder(tamanoRequerido, tamanoRequerido);
+
+                do
+                {
+                    ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+
+                    if (teclaInfo.Key == ConsoleKey.Enter && sb.Length == tamanoRequerido)
+                    {
+                        if (int.TryParse(sb.ToString(), out int numeroConvertido))
+                        {
+                            if (numeroConvertido >= 1 && numeroConvertido <= rangoValido)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write($"\n\nConfirmar el número ");
+                                Console.ResetColor();
+
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.Write(numeroConvertido);
+                                Console.ResetColor();
+
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write(" (Yes/No): ");
+                                Console.ResetColor();
+
+                                string respuesta = Console.ReadLine().ToLower().Trim();
+
+                                if (respuesta == "yes")
+                                {
+                                    numeroFinal = numeroConvertido;
+                                    numeroConfirmado = true;
+                                    break;
+                                }
+                                else if (respuesta == "no")
+                                {
+                                    Mostrar("Reiniciando número", 1);
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("\nElección inválida");
+                                    Console.ResetColor();
+                                    Mostrar("Reiniciando número", 1);
+                                    LimpiarDesde(posicionInicial);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
+                    {
+                        sb.Remove(sb.Length - 1, 1);
+                        Console.Write("\b \b");
+                    }
+
+                    if (sb.Length < tamanoRequerido)
+                    {
+                        if (char.IsDigit(teclaInfo.KeyChar))
+                        {
+                            if (teclaInfo.KeyChar == '0')
+                            {
+                                if (sb.Length > 0)
+                                {
+                                    sb.Append('0');
+                                    Console.Write('0');
+                                }
+                            }
+                            else
+                            {
+                                sb.Append(teclaInfo.KeyChar);
+                                Console.Write(teclaInfo.KeyChar);
+                            }
+                        }
+                    }
+                } while (true);
+            }
+            return numeroFinal;
+        }
+
+        internal static void LimpiarDesde(int filaInicio)
+        {
+            int filaActual = Console.CursorTop; 
+            for (int i = filaInicio; i <= filaActual; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write(new string(' ', Console.WindowWidth - 1));
+            }
+            Console.SetCursorPosition(0, filaInicio);
         }
 
         internal static int ValidarNumerico(int limiteCaracteres, Action menuMostrar, int rangoValido, bool esLimite)

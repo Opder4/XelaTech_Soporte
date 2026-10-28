@@ -71,7 +71,7 @@ namespace XelaTech_Soporte
                         ModuloClientes.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 2:
-
+                        ModuloTecnicos.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 3:
 
