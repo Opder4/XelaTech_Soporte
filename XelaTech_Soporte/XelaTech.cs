@@ -61,14 +61,28 @@ namespace XelaTech_Soporte
 			matrizCargaSemanal = nuevaMatrizCargaSemanal;
 		}
 
-		public void IngresarEquipo(Equipo nuevoEquipo)
+		public void IngresarEquipo(Laptop nuevoEquipo)
 		{
             string codigoUnico = GenerarCodigoUnico(nuevoEquipo.Prefijo);
             nuevoEquipo.Codigo = codigoUnico;
             listaEquipos.Add(nuevoEquipo);
 		}
 
-		public void IngresarSolicitud(Solicitud nuevaSolicitud)
+        public void IngresarEquipo(ComputadoraEscritorio nuevoEquipo)
+        {
+            string codigoUnico = GenerarCodigoUnico(nuevoEquipo.Prefijo);
+            nuevoEquipo.Codigo = codigoUnico;
+            listaEquipos.Add(nuevoEquipo);
+        }
+
+        public void IngresarEquipo(Impresora nuevoEquipo)
+        {
+            string codigoUnico = GenerarCodigoUnico(nuevoEquipo.Prefijo);
+            nuevoEquipo.Codigo = codigoUnico;
+            listaEquipos.Add(nuevoEquipo);
+        }
+
+        public void IngresarSolicitud(Solicitud nuevaSolicitud)
 		{
             string codigoUnico = GenerarCodigoUnico(nuevaSolicitud.Prefijo);
             nuevaSolicitud.Codigo = codigoUnico;

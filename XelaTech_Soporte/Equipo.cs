@@ -64,12 +64,12 @@ namespace XelaTech_Soporte
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Propietario: ");
             Console.ResetColor();
-            Console.Write(Propietario.NombreCompleto + $" | {Propietario.Telefono} | {Propietario.Codigo}");
+            Console.Write("Nombre: " + Propietario.NombreCompleto + $" | TEL: {Propietario.Telefono} | ID: {Propietario.Codigo}");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Tipo de Equipo: ");
             Console.ResetColor();
-            Console.Write(TipoEquipo);
+            Console.Write(ObtenerTipoDeEquipo());
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Estado Físico: ");
@@ -80,6 +80,17 @@ namespace XelaTech_Soporte
             Console.Write("Accesorios: ");
             Console.ResetColor();
             Console.Write(Accesorios);
+        }
+
+        public string ObtenerTipoDeEquipo()
+        {
+            switch (TipoEquipo)
+            {
+                case TipoEquipo.Impresora: return "Impresora";
+                case TipoEquipo.Laptop: return "Laptop";
+                case TipoEquipo.PCEscritorio: return "PC de escritorio";
+                default: return TipoEquipo.ToString();
+            }
         }
 
         public virtual double CalcularCostoRevision()
@@ -142,7 +153,7 @@ namespace XelaTech_Soporte
         }
     }
 
-    class Laptop : Equipo
+    public class Laptop : Equipo
     {
         private bool incluyeCargador;
 
@@ -181,7 +192,7 @@ namespace XelaTech_Soporte
 
     }
 
-    class ComputadoraEscritorio : Equipo
+    public class ComputadoraEscritorio : Equipo
     {
         private string formatoGabinete;
 
@@ -213,7 +224,7 @@ namespace XelaTech_Soporte
 
     }
 
-    class Impresora : Equipo
+    public class Impresora : Equipo
     {
         private string tipoImpresion;
 

@@ -156,6 +156,121 @@ namespace XelaTech_Soporte
             }
         }
 
+        public static string ObtenerTipoDeEquipo(TipoEquipo tipoEquipo)
+        {
+            switch (tipoEquipo)
+            {
+                case TipoEquipo.Impresora: return "Impresora";
+                case TipoEquipo.Laptop: return "Laptop";
+                case TipoEquipo.PCEscritorio: return "PC de escritorio";
+                default: return tipoEquipo.ToString();
+            }
+        }
+
+        public static int MenuTipoDeEquipo()
+        {
+            string mensajeSolicitud = "Elija el Tipo de Equipo";
+            int numeroElegido;
+
+            List<string> listaTiposDeEquipo = Enum.GetValues(typeof(TipoEquipo))
+                                   .Cast<TipoEquipo>()
+                                   .Select(m => ObtenerTipoDeEquipo(m))
+                                   .ToList();
+
+            int anchoConsola = Console.WindowWidth;
+            int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
+            if (espacios < 0) espacios = 0;
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
+            Console.ResetColor();
+            Console.Write("\n\n");
+
+            StringBuilder sbEspecialidad = new StringBuilder(1, 1);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Ingrese el número correspondiente:\n");
+            Console.ResetColor();
+
+            for (int i = 0; i < listaTiposDeEquipo.Count; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write($"{i + 1}. ");
+                Console.ResetColor();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(listaTiposDeEquipo[i]);
+                Console.ResetColor();
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("\nElección: ");
+            Console.ResetColor();
+
+            do
+            {
+                ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+
+                if (teclaInfo.Key == ConsoleKey.Enter && sbEspecialidad.Length == 1)
+                {
+                    numeroElegido = int.Parse(sbEspecialidad.ToString());
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("\n\nConfirmar elección de ");
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(listaTiposDeEquipo[numeroElegido - 1]);
+                    Console.ResetColor();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(" (Yes/No): ");
+                    Console.ResetColor();
+
+                    string respuesta = Console.ReadLine().ToLower().Trim();
+
+                    if (respuesta == "no")
+                    {
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuEspecialidadTecnico();
+                    }
+                    else if (respuesta == "yes")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nElección inválida");
+                        Console.ResetColor();
+                        Mostrar("Reiniciando selección", 1);
+                        Console.Clear();
+                        return MenuEspecialidadTecnico();
+                    }
+                }
+
+                if (teclaInfo.Key == ConsoleKey.Backspace && sbEspecialidad.Length > 0)
+                {
+                    sbEspecialidad.Remove(sbEspecialidad.Length - 1, 1);
+                    Console.Write("\b \b");
+                }
+
+                if (sbEspecialidad.Length < 1 && char.IsDigit(teclaInfo.KeyChar))
+                {
+                    int numeroConvertido = int.Parse(teclaInfo.KeyChar.ToString());
+                    if (numeroConvertido >= 1 && numeroConvertido <= listaTiposDeEquipo.Count)
+                    {
+                        sbEspecialidad.Append(teclaInfo.KeyChar);
+                        Console.Write(teclaInfo.KeyChar);
+                    }
+                }
+            } while (true);
+
+            return numeroElegido;
+        }
+
         public static int MenuEspecialidadTecnico()
         {
             string mensajeSolicitud = "Elija la Especialidad del Técnico";
@@ -781,6 +896,7 @@ namespace XelaTech_Soporte
                                 else if (respuesta == "no")
                                 {
                                     Mostrar("Reiniciando número", 1);
+                                    LimpiarDesde(posicionInicial);
                                     break;
                                 }
                                 else

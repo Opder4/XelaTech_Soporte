@@ -52,9 +52,9 @@ namespace XelaTech_Soporte
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
-            Console.WriteLine("===================================");
+            Console.WriteLine("====================================");
             Console.WriteLine("         GESTIÓN DE CLIENTES       ");
-            Console.WriteLine("===================================");
+            Console.WriteLine("====================================");
             Console.ResetColor();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow;

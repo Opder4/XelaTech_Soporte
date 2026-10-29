@@ -55,7 +55,8 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("1. Registrar un Cliente");
+            Console.WriteLine("1. Registrar un Técnico" +
+                "");
             Console.WriteLine("2. Consultar Información de Técnico - Cambio de Disponiblidad");
             Console.WriteLine("3. Regresar al Menú Principal");
             Console.ResetColor();
