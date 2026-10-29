@@ -80,7 +80,7 @@ namespace XelaTech_Soporte
 
                         break;
                     case 5:
-
+                        ModuloRepuestos.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 6:
 

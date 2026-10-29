@@ -16,7 +16,6 @@ namespace XelaTech_Soporte
         {
             FieldInfo field = valor.GetType().GetField(valor.ToString());
             DescriptionAttribute attribute = field?.GetCustomAttribute<DescriptionAttribute>();
-
             return attribute != null ? attribute.Description : valor.ToString();
         }
 
@@ -41,39 +40,31 @@ namespace XelaTech_Soporte
         {
             string mensajeSolicitud = "Elija su Tipo de Cliente";
             int numeroElegido;
-
             List<string> listaTipos = Enum.GetValues(typeof(TipoCliente))
                                    .Cast<TipoCliente>()
                                    .Select(m => ObtenerTipoCliente(m))
                                    .ToList();
-
             int anchoConsola = Console.WindowWidth;
             int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
             if (espacios < 0) espacios = 0;
-
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
             Console.ResetColor();
             Console.Write("\n\n");
-
             StringBuilder sbTipo = new StringBuilder(1, 1);
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Ingrese el número correspondiente\n");
             Console.ResetColor();
-
             foreach (string tipo in listaTipos)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write($"{listaTipos.IndexOf(tipo) + 1}. ");
                 Console.ResetColor();
-
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write($"{tipo}");
                 Console.ResetColor();
                 Console.WriteLine();
             }
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("\nElección: ");
             Console.ResetColor();
@@ -81,25 +72,19 @@ namespace XelaTech_Soporte
             do
             {
                 ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
-
                 if (teclaInfo.Key == ConsoleKey.Enter && sbTipo.Length == 1)
                 {
                     numeroElegido = int.Parse(sbTipo.ToString());
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write($"\n\nConfirmar elección de ");
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write(listaTipos[numeroElegido - 1]);
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(" (Yes/No): ");
                     Console.ResetColor();
-
                     string respuesta = Console.ReadLine().ToLower().Trim();
-
                     if (respuesta == "no")
                     {
                         Mostrar("Reiniciando selección", 1);
@@ -121,13 +106,11 @@ namespace XelaTech_Soporte
                         return MenuTipoDeCliente();
                     }
                 }
-
                 if (teclaInfo.Key == ConsoleKey.Backspace && sbTipo.Length > 0)
                 {
                     sbTipo.Remove(sbTipo.Length - 1, 1);
                     Console.Write("\b \b");
                 }
-
                 if (sbTipo.Length < 1)
                 {
                     if (char.IsDigit(teclaInfo.KeyChar))
@@ -171,42 +154,33 @@ namespace XelaTech_Soporte
         {
             string mensajeSolicitud = "Elija el Tipo de Equipo";
             int numeroElegido;
-
             List<string> listaTiposDeEquipo = Enum.GetValues(typeof(TipoEquipo))
                                    .Cast<TipoEquipo>()
                                    .Select(m => ObtenerTipoDeEquipo(m))
                                    .ToList();
-
             int anchoConsola = Console.WindowWidth;
             int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
             if (espacios < 0) espacios = 0;
-
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
             Console.ResetColor();
             Console.Write("\n\n");
-
             StringBuilder sbEspecialidad = new StringBuilder(1, 1);
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Ingrese el número correspondiente:\n");
             Console.ResetColor();
-
             for (int i = 0; i < listaTiposDeEquipo.Count; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write($"{i + 1}. ");
                 Console.ResetColor();
-
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(listaTiposDeEquipo[i]);
                 Console.ResetColor();
             }
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("\nElección: ");
             Console.ResetColor();
-
             do
             {
                 ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
@@ -214,21 +188,16 @@ namespace XelaTech_Soporte
                 if (teclaInfo.Key == ConsoleKey.Enter && sbEspecialidad.Length == 1)
                 {
                     numeroElegido = int.Parse(sbEspecialidad.ToString());
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("\n\nConfirmar elección de ");
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write(listaTiposDeEquipo[numeroElegido - 1]);
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(" (Yes/No): ");
                     Console.ResetColor();
-
                     string respuesta = Console.ReadLine().ToLower().Trim();
-
                     if (respuesta == "no")
                     {
                         Mostrar("Reiniciando selección", 1);
@@ -250,13 +219,11 @@ namespace XelaTech_Soporte
                         return MenuEspecialidadTecnico();
                     }
                 }
-
                 if (teclaInfo.Key == ConsoleKey.Backspace && sbEspecialidad.Length > 0)
                 {
                     sbEspecialidad.Remove(sbEspecialidad.Length - 1, 1);
                     Console.Write("\b \b");
                 }
-
                 if (sbEspecialidad.Length < 1 && char.IsDigit(teclaInfo.KeyChar))
                 {
                     int numeroConvertido = int.Parse(teclaInfo.KeyChar.ToString());
@@ -275,64 +242,49 @@ namespace XelaTech_Soporte
         {
             string mensajeSolicitud = "Elija la Especialidad del Técnico";
             int numeroElegido;
-
             List<string> listaEspecialidades = Enum.GetValues(typeof(EspecialidadTecnico))
                                    .Cast<EspecialidadTecnico>()
                                    .Select(m => ObtenerEspecialidadTecnico(m))
                                    .ToList();
-
             int anchoConsola = Console.WindowWidth;
             int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
             if (espacios < 0) espacios = 0;
-
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
             Console.ResetColor();
             Console.Write("\n\n");
-
             StringBuilder sbEspecialidad = new StringBuilder(1, 1);
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Ingrese el número correspondiente:\n");
             Console.ResetColor();
-
             for (int i = 0; i < listaEspecialidades.Count; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write($"{i + 1}. ");
                 Console.ResetColor();
-
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(listaEspecialidades[i]);
                 Console.ResetColor();
             }
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("\nElección: ");
             Console.ResetColor();
-
             do
             {
                 ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
-
                 if (teclaInfo.Key == ConsoleKey.Enter && sbEspecialidad.Length == 1)
                 {
                     numeroElegido = int.Parse(sbEspecialidad.ToString());
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("\n\nConfirmar elección de ");
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write(listaEspecialidades[numeroElegido - 1]);
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(" (Yes/No): ");
                     Console.ResetColor();
-
                     string respuesta = Console.ReadLine().ToLower().Trim();
-
                     if (respuesta == "no")
                     {
                         Mostrar("Reiniciando selección", 1);
@@ -354,13 +306,11 @@ namespace XelaTech_Soporte
                         return MenuEspecialidadTecnico();
                     }
                 }
-
                 if (teclaInfo.Key == ConsoleKey.Backspace && sbEspecialidad.Length > 0)
                 {
                     sbEspecialidad.Remove(sbEspecialidad.Length - 1, 1);
                     Console.Write("\b \b");
                 }
-
                 if (sbEspecialidad.Length < 1 && char.IsDigit(teclaInfo.KeyChar))
                 {
                     int numeroConvertido = int.Parse(teclaInfo.KeyChar.ToString());
@@ -389,31 +339,24 @@ namespace XelaTech_Soporte
         {
             string mensajeSolicitud = "Elija el Estado del Técnico";
             int numeroElegido;
-
             List<EstadoTecnico> listaEstados = Enum.GetValues(typeof(EstadoTecnico))
                                    .Cast<EstadoTecnico>()
                                    .Where(m => m != EstadoTecnico.Ocupado)
                                    .ToList();
-
             List<string> listaNombres = listaEstados
                            .Select(m => ObtenerEstadoTecnico(m))
                            .ToList();
-
             int anchoConsola = Console.WindowWidth;
             int espacios = (anchoConsola - mensajeSolicitud.Length) / 2;
             if (espacios < 0) espacios = 0;
-
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine(new string(' ', espacios) + mensajeSolicitud.ToUpper());
             Console.ResetColor();
             Console.Write("\n\n");
-
             StringBuilder sbEstado = new StringBuilder(1, 1);
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Ingrese el número correspondiente:\n");
             Console.ResetColor();
-
             for (int i = 0; i < listaNombres.Count; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -424,11 +367,9 @@ namespace XelaTech_Soporte
                 Console.WriteLine(listaEstados[i]);
                 Console.ResetColor();
             }
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("\nElección: ");
             Console.ResetColor();
-
             do
             {
                 ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
@@ -436,21 +377,16 @@ namespace XelaTech_Soporte
                 if (teclaInfo.Key == ConsoleKey.Enter && sbEstado.Length == 1)
                 {
                     numeroElegido = int.Parse(sbEstado.ToString());
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("\n\nConfirmar elección de ");
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write(listaEstados[numeroElegido - 1]);
                     Console.ResetColor();
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write(" (Yes/No): ");
                     Console.ResetColor();
-
                     string respuesta = Console.ReadLine().ToLower().Trim();
-
                     if (respuesta == "no")
                     {
                         Mostrar("Reiniciando selección", 1);
@@ -472,7 +408,6 @@ namespace XelaTech_Soporte
                         return MenuEstadoTecnico();
                     }
                 }
-
                 if (teclaInfo.Key == ConsoleKey.Backspace && sbEstado.Length > 0)
                 {
                     sbEstado.Remove(sbEstado.Length - 1, 1);
@@ -525,7 +460,6 @@ namespace XelaTech_Soporte
                         Console.Write(" (Yes/No): ");
                         Console.ResetColor();
                         string respuesta = Console.ReadLine().ToLower().Trim();
-
                         if (respuesta == "yes")
                         {
                             textoFinal = sb.ToString();
@@ -567,7 +501,6 @@ namespace XelaTech_Soporte
                                 Console.Write(' ');
                             }
                         }
-
                     }
                 } while (true);
             }
@@ -614,7 +547,6 @@ namespace XelaTech_Soporte
                             Console.Write(" (Yes/No): ");
                             Console.ResetColor();
                             string respuesta = Console.ReadLine().ToLower().Trim();
-
                             if (respuesta == "yes")
                             {
                                 numeroFinal = numeroConvertido;
@@ -689,9 +621,7 @@ namespace XelaTech_Soporte
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(" dígitos. \n\n Ingresar: ");
                 Console.ResetColor();
-
                 StringBuilder sb = new StringBuilder(limiteCaracteres);
-
                 do
                 {
                     ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
@@ -710,7 +640,6 @@ namespace XelaTech_Soporte
                             Console.Write(" (Yes/No): ");
                             Console.ResetColor();
                             string respuesta = Console.ReadLine().ToLower().Trim();
-
                             if (respuesta == "yes")
                             {
                                 numeroFinal = numeroConvertido;
@@ -733,13 +662,11 @@ namespace XelaTech_Soporte
                             }
                         }
                     }
-
                     if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
                     {
                         sb.Remove(sb.Length - 1, 1);
                         Console.Write("\b \b");
                     }
-
                     if (sb.Length < limiteCaracteres)
                     {
                         if (char.IsDigit(teclaInfo.KeyChar))
@@ -853,16 +780,13 @@ namespace XelaTech_Soporte
             bool numeroConfirmado = false;
             int numeroFinal = 0;
             menuMostrar();
-
             while (!numeroConfirmado)
             {
                 int posicionInicial = Console.CursorTop;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("\n Ingresar: ");
                 Console.ResetColor();
-
                 StringBuilder sb = new StringBuilder(tamanoRequerido, tamanoRequerido);
-
                 do
                 {
                     ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
@@ -876,17 +800,13 @@ namespace XelaTech_Soporte
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write($"\n\nConfirmar el número ");
                                 Console.ResetColor();
-
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.Write(numeroConvertido);
                                 Console.ResetColor();
-
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write(" (Yes/No): ");
                                 Console.ResetColor();
-
                                 string respuesta = Console.ReadLine().ToLower().Trim();
-
                                 if (respuesta == "yes")
                                 {
                                     numeroFinal = numeroConvertido;
@@ -911,13 +831,11 @@ namespace XelaTech_Soporte
                             }
                         }
                     }
-
                     if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
                     {
                         sb.Remove(sb.Length - 1, 1);
                         Console.Write("\b \b");
                     }
-
                     if (sb.Length < tamanoRequerido)
                     {
                         if (char.IsDigit(teclaInfo.KeyChar))
@@ -984,7 +902,6 @@ namespace XelaTech_Soporte
                                 Console.Write(" (Yes/No): ");
                                 Console.ResetColor();
                                 string respuesta = Console.ReadLine().ToLower().Trim();
-
                                 if (respuesta == "yes")
                                 {
                                     numeroFinal = numeroConvertido;
@@ -1021,7 +938,6 @@ namespace XelaTech_Soporte
                             {
                                 continue;
                             }
-
                             sb.Append(teclaInfo.KeyChar);
                             Console.Write(teclaInfo.KeyChar);
                         }
@@ -1062,7 +978,6 @@ namespace XelaTech_Soporte
                                 Console.Write(" (Yes/No): ");
                                 Console.ResetColor();
                                 string respuesta = Console.ReadLine().ToLower().Trim();
-
                                 if (respuesta == "yes")
                                 {
                                     numeroFinal = numeroConvertido;
@@ -1124,7 +1039,6 @@ namespace XelaTech_Soporte
             int anchoConsola = Console.WindowWidth;
             int espacios = (anchoConsola - mensajeSolicitudDeDatos.Length) / 2;
             if (espacios < 0) espacios = 0;
-
             while (!telefonoConfirmado)
             {
                 Console.Clear();
@@ -1134,9 +1048,7 @@ namespace XelaTech_Soporte
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write($"Presione Enter para enviar. \nEl número debe ser de 8 dígitos.\n\n Ingresar: ");
                 Console.ResetColor();
-
                 StringBuilder sb = new StringBuilder(tamanoRequerido, tamanoRequerido);
-
                 do
                 {
                     ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
@@ -1153,9 +1065,7 @@ namespace XelaTech_Soporte
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write(" (Yes/No): ");
                             Console.ResetColor();
-
                             string respuesta = Console.ReadLine().ToLower().Trim();
-
                             if (respuesta == "yes")
                             {
                                 telefonoFinal = numeroConvertido;
@@ -1178,7 +1088,6 @@ namespace XelaTech_Soporte
                             }
                         }
                     }
-
                     if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
                     {
                         if (sb.Length == 4)
@@ -1253,7 +1162,6 @@ namespace XelaTech_Soporte
                         Console.Write(" (Yes/No): ");
                         Console.ResetColor();
                         string respuesta = Console.ReadLine().ToLower().Trim();
-
                         if (respuesta == "yes")
                         {
                             correoFinal = sb.ToString();
@@ -1315,27 +1223,17 @@ namespace XelaTech_Soporte
         }
         internal static void Mostrar(string textoMostrar, int duracionSegundos)
         {
-
             int ciclosTotales = duracionSegundos * 4;
-
             for (int i = 0; i < ciclosTotales; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 int cantidadPuntos = i % 4;
                 string puntos = new string('.', cantidadPuntos);
-
-
                 string espaciosBlancos = new string(' ', 3 - cantidadPuntos);
-
-
                 Console.Write($"\r{textoMostrar}{puntos}{espaciosBlancos}");
-
-
                 Thread.Sleep(250);
-
             }
             Console.ResetColor();
-
             Console.Write("\r" + new string(' ', 20) + "\r");
         }
         
@@ -1371,7 +1269,6 @@ namespace XelaTech_Soporte
                         Console.Write(" (Yes/No): ");
                         Console.ResetColor();
                         string respuesta = Console.ReadLine().ToLower().Trim();
-
                         if (respuesta == "yes")
                         {
                             alfanumericoFinal = sb.ToString();
@@ -1392,7 +1289,6 @@ namespace XelaTech_Soporte
                             Mostrar("Reiniciando texto", 1);
                             break;
                         }
-
                     }
                     if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
                     {
@@ -1415,11 +1311,9 @@ namespace XelaTech_Soporte
             int tamanoRequerido = 2;
             bool calificacionConfirmada = false;
             double calificacionFinal = 0;
-
             int anchoConsola = Console.WindowWidth;
             int espacios = (anchoConsola - mensajeSolicitudDeDatos.Length) / 2;
             if (espacios < 0) espacios = 0;
-
             while (!calificacionConfirmada)
             {
                 Console.Clear();
@@ -1429,15 +1323,10 @@ namespace XelaTech_Soporte
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write($"\nCalificación de 1.0 a 5.0 \n\n Ingresar: ");
                 Console.ResetColor();
-
-
                 StringBuilder sb = new StringBuilder(tamanoRequerido, tamanoRequerido);
-
                 do
                 {
                     ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
-
-
                     if (teclaInfo.Key == ConsoleKey.Enter && sb.Length == tamanoRequerido)
                     {
                         if (double.TryParse(sb.ToString(), out double numeroConvertido))
@@ -1480,7 +1369,6 @@ namespace XelaTech_Soporte
                             }
                         }
                     }
-
                     if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
                     {
                         if (sb.Length == 2)
@@ -1518,6 +1406,94 @@ namespace XelaTech_Soporte
                 } while (true);
             }
             return calificacionFinal;
+        }
+
+        internal static double ValidarPrecio(string mensajeSolicitudDeDatos, int limiteCaracteres)
+        {
+            bool numeroConfirmado = false;
+            double numeroFinal = 0;
+            int anchoConsola = Console.WindowWidth;
+            int espacios = (anchoConsola - mensajeSolicitudDeDatos.Length) / 2;
+            if (espacios < 0) espacios = 0;
+            while (!numeroConfirmado)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine(new string(' ', espacios) + mensajeSolicitudDeDatos.ToUpper());
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Presione Enter para enviar\n\n Ingresar: Q. ");
+                Console.ResetColor();
+                StringBuilder sb = new StringBuilder(limiteCaracteres);
+                do
+                {
+                    ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+
+                    if (teclaInfo.Key == ConsoleKey.Enter && sb.Length > 0)
+                    {
+                        if (double.TryParse(sb.ToString(), out double numeroConvertido))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write($"\n\nConfirmar el monto de ");
+                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write($"Q. {numeroConvertido:F2}");
+                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write(" (Yes/No): ");
+                            Console.ResetColor();
+                            string respuesta = Console.ReadLine().ToLower().Trim();
+                            if (respuesta == "yes")
+                            {
+                                numeroFinal = numeroConvertido;
+                                numeroConfirmado = true;
+                                Console.Clear();
+                                break;
+                            }
+                            else if (respuesta == "no")
+                            {
+                                Mostrar("Reiniciando monto", 1);
+                                break;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\nElección inválida");
+                                Console.ResetColor();
+                                Mostrar("Reiniciando monto", 1);
+                                break;
+                            }
+                        }
+                    }
+                    if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
+                    {
+                        sb.Remove(sb.Length - 1, 1);
+                        Console.Write("\b \b");
+                    }
+                    if (sb.Length < limiteCaracteres)
+                    {
+                        if (char.IsDigit(teclaInfo.KeyChar))
+                        {
+                            sb.Append(teclaInfo.KeyChar);
+                            Console.Write(teclaInfo.KeyChar);
+                        }
+                        else if (teclaInfo.KeyChar == '.' && !sb.ToString().Contains("."))
+                        {
+                            if (sb.Length == 0)
+                            {
+                                sb.Append("0.");
+                                Console.Write("0.");
+                            }
+                            else
+                            {
+                                sb.Append(teclaInfo.KeyChar);
+                                Console.Write(teclaInfo.KeyChar);
+                            }
+                        }
+                    }
+                } while (true);
+            }
+            return numeroFinal;
         }
     }
 }

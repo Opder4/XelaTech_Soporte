@@ -37,6 +37,45 @@ namespace XelaTech_Soporte
             CantidadUtilizada = 0;
         }
 
+        public void MostrarInformacion()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("ID: ");
+            Console.ResetColor();
+            Console.Write(Codigo);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Nombre: ");
+            Console.ResetColor();
+            Console.Write(Nombre);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Categoría: ");
+            Console.ResetColor();
+            Console.Write(Categoria);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Existencia Actual: ");
+            Console.ResetColor();
+            Console.Write(Existencia);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Existencia Mínima: ");
+            Console.ResetColor();
+            Console.Write(ExistenciaMinima);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Costo Unitario: ");
+            Console.ResetColor();
+            Console.Write("Q. " + CostoUnitario.ToString("0.00"));
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Precio de Venta: ");
+            Console.ResetColor();
+            Console.Write("Q. " + PrecioVenta.ToString("0.00"));
+            Console.WriteLine();
+        }
+
         public int CantidadUtilizada
         {
             get { return cantidadUtilizada; }
