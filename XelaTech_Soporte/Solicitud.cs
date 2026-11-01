@@ -171,12 +171,17 @@ namespace XelaTech_Soporte
 
         public void ActualizarEstado(EstadoSolicitud nuevoEstado)
         {
-            // Por definir
+            EstadoActual = nuevoEstado;
+            HistorialEstados.Push(nuevoEstado);
         }
 
         public void DeshacerEstado()
         {
-            // Por definir
+            if (HistorialEstados.Count > 1)
+            {
+                HistorialEstados.Pop(); 
+                EstadoActual = HistorialEstados.Peek(); 
+            }
         }
 
         public double CalcularTotal()

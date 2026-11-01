@@ -14,7 +14,7 @@ namespace XelaTech_Soporte
             int opcionMenu = 0;
             do
             {
-                opcionMenu = ValidarNumerico(1, OpcionesMenuRepuesto, 3);
+                opcionMenu = ValidarNumerico(1, OpcionesMenuRepuesto, 4);
                 Console.Clear();
                 switch (opcionMenu)
                 {
@@ -25,12 +25,16 @@ namespace XelaTech_Soporte
                         MostrarInformacionDeRepuesto(xelaTech);
                         break;
                     case 3:
+                        AgregarExistenciasRepuesto(xelaTech);
+                        break;
+                    case 4:
+
                         break;
                     default:
                         Error();
                         break;
                 }
-            } while (opcionMenu != 3);
+            } while (opcionMenu != 4);
         }
 
         public static void OpcionesMenuRepuesto()
@@ -45,7 +49,8 @@ namespace XelaTech_Soporte
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("1. Registrar un Repuesto");
             Console.WriteLine("2. Consultar Información de Repuesto");
-            Console.WriteLine("3. Regresar al Menú Principal");
+            Console.WriteLine("3. Agregar Existencias a un Repuesto");
+            Console.WriteLine("4. Regresar al Menú Principal");
             Console.ResetColor();
         }
 
@@ -119,6 +124,47 @@ namespace XelaTech_Soporte
                 xelaTech.ListaRepuestos[posicionRepuesto - 1].MostrarInformacion();
                 LimpiarConsola();
             }
+        }
+
+        public static void AgregarExistenciasRepuesto(XelaTech xelaTech)
+        {
+            if (xelaTech.ListaRepuestos.Count == 0 || xelaTech.ListaRepuestos == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No hay ningún Repuesto Registrado");
+                Console.ResetColor();
+                LimpiarConsola();
+                return;
+            }
+            MenuAgregar(xelaTech);
+        }
+
+        public static void MenuAgregar(XelaTech xelaTech)
+        {
+            int opcion = ValidarNumerico(1, () => {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("===================================");
+                Console.WriteLine("        AGREGAR EXISTENCIAS        ");
+                Console.WriteLine("===================================");
+                Console.ResetColor();
+                ListaDeRepuestos(xelaTech);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\n{xelaTech.ListaRepuestos.Count + 1}. Salir sin agregar");
+                Console.ResetColor();
+            }, xelaTech.ListaRepuestos.Count + 1);
+            if (opcion == xelaTech.ListaRepuestos.Count + 1) return;
+            Repuesto repuestoSel = xelaTech.ListaRepuestos[opcion - 1];
+            int cantidad = 0;
+            while (cantidad < 1)
+            {
+                cantidad = ValidarNumerico($"Ingrese la cantidad a agregar para {repuestoSel.Nombre} (Mínimo 1)", 4, true);
+            }
+            repuestoSel.Existencia += cantidad;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Existencias actualizadas. Nueva existencia de {repuestoSel.Nombre}: {repuestoSel.Existencia}");
+            Console.ResetColor();
+            LimpiarConsola();
+            MenuAgregar(xelaTech);
         }
 
         public static void LimpiarConsola()

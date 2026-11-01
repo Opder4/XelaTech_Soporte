@@ -50,6 +50,7 @@
     <Compile Include="ModuloClientes.cs" />
     <Compile Include="ModuloEquipos.cs" />
     <Compile Include="ModuloRepuestos.cs" />
+    <Compile Include="ModuloSolicitudes.cs" />
     <Compile Include="ModuloTecnicos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

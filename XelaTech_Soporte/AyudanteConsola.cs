@@ -1495,5 +1495,25 @@ namespace XelaTech_Soporte
             }
             return numeroFinal;
         }
+
+        public static void Colores(int opcion)
+        {
+            switch (opcion)
+            {
+                case 1:
+                    string reset = "\u001b[0m";
+                    break;
+                case 2:
+                    string rojo = "\u001b[31m";
+                    break;
+                case 3:
+                    string verde = "\u001b[32m";
+                    break;
+                case 4:
+                    string azul = "\u001b[34m";
+                    break;
+            }
+            
+        }
     }
 }

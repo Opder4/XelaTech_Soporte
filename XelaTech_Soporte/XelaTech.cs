@@ -22,7 +22,9 @@ namespace XelaTech_Soporte
 
 		private List<Repuesto> listaRepuestos = new List<Repuesto>();
 
-		private int[,] matrizCargaSemanal;
+        private List<Solicitud> listaTodasSolicitudes = new List<Solicitud>();
+
+        private int[,] matrizCargaSemanal;
 
 		private int[] calificaciones;
 
@@ -86,15 +88,16 @@ namespace XelaTech_Soporte
 		{
             string codigoUnico = GenerarCodigoUnico(nuevaSolicitud.Prefijo);
             nuevaSolicitud.Codigo = codigoUnico;
+            listaTodasSolicitudes.Add(nuevaSolicitud);
             if (nuevaSolicitud.Prioridad == PrioridadSolicitud.Urgente)
-			{
-				colaUrgente.Enqueue(nuevaSolicitud);
-			}
-			else
-			{
-				colaNormal.Enqueue(nuevaSolicitud);
-			}
-		}
+            {
+                colaUrgente.Enqueue(nuevaSolicitud);
+            }
+            else
+            {
+                colaNormal.Enqueue(nuevaSolicitud);
+            }
+        }
 
 		public void IngresarRepuesto(Repuesto nuevoRepuesto)
 		{
@@ -150,5 +153,11 @@ namespace XelaTech_Soporte
 			get { return listaClientes; }
 			set { listaClientes = value; }
 		}
-	}
+
+        public List<Solicitud> ListaTodasSolicitudes
+		{
+			get { return listaTodasSolicitudes; }
+			set { listaTodasSolicitudes = value; }
+		}
+    }
 }
