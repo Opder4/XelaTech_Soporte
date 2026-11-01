@@ -47,6 +47,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="CodigoUnico.cs" />
     <Compile Include="Equipo.cs" />
+    <Compile Include="ModuloAtencionDeSolicitudes.cs" />
     <Compile Include="ModuloClientes.cs" />
     <Compile Include="ModuloEquipos.cs" />
     <Compile Include="ModuloRepuestos.cs" />
