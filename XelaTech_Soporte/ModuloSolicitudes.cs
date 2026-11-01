@@ -220,7 +220,7 @@ namespace XelaTech_Soporte
                 while (agregando)
                 {
                     Console.Clear();
-                    int repuestoPosicion = ValidarNumerico(1, () => {
+                    int repuestoPosicion = ValidarNumericoMenusGrandes(3, () => {
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine();
                         Console.WriteLine("Seleccione los repuestos a utilizar para la reparación:");
@@ -305,6 +305,53 @@ namespace XelaTech_Soporte
                 double costoManoObra = ValidarPrecio("Ingrese el costo de Mano de Obra para esta reparación", 8);
                 solicitud.ManoDeObra = costoManoObra;
                 solicitud.TecnicoAsignado.TrabajosActivos -= 1;
+                solicitud.TecnicoAsignado.ServiciosFinalizados += 1;
+                double costoTotal = costoManoObra;
+                if (solicitud.Cliente.TipoCCliente == TipoCliente.Estudiante)
+                {
+                    costoTotal += 20;
+                }
+                else if (solicitud.Cliente.TipoCCliente == TipoCliente.PersonaComun)
+                {
+                    costoTotal += 50;
+                }
+                else if (solicitud.Cliente.TipoCCliente == TipoCliente.negocioPequeno)
+                {
+                    costoTotal += 150;
+                }
+                else
+                {
+                    costoTotal += 300;
+                }
+                if (solicitud.Equipo.TipoEquipo == TipoEquipo.PCEscritorio)
+                {
+                    costoTotal += 75;
+                }
+                else if (solicitud.Equipo.TipoEquipo == TipoEquipo.Laptop)
+                {
+                    costoTotal += 150;
+                }
+                else
+                {
+                    costoTotal += 300;
+                }
+                double gananciaRepuestosUsados = 0;
+                if (solicitud.RepuestosUsados.Count > 0)
+                {
+                    double preciosRepuestosUsados = 0;
+                    double ventaRepuestosUsados = 0;
+                    foreach (Repuesto repuesto in solicitud.RepuestosUsados)
+                    {
+                        preciosRepuestosUsados += repuesto.CostoUnitario;
+                        ventaRepuestosUsados += repuesto.PrecioVenta;
+                    }
+                    gananciaRepuestosUsados = ventaRepuestosUsados - preciosRepuestosUsados;
+                }
+                xelaTech.IngresosTotales += costoTotal + gananciaRepuestosUsados;
+                solicitud.CostoTotal = costoTotal + gananciaRepuestosUsados;
+                double calificacionSolicitud = ValidarCalificacion();
+                xelaTech.Calificaciones.Add(calificacionSolicitud);
+                solicitud.TecnicoAsignado.Calificaciones.Add(calificacionSolicitud);
             }
             solicitud.ActualizarEstado(siguienteEstado);
             Console.ForegroundColor = ConsoleColor.Green;
@@ -385,10 +432,12 @@ namespace XelaTech_Soporte
             solicitud.MostrarDetalles();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("--- HISTORIAL DE ESTADOS ---");
             Console.ResetColor();
             solicitud.MostrarHistorialDeEstados();
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("--- REPUESTOS USADOS ---");
             Console.ResetColor();

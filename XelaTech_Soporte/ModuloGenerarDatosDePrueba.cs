@@ -60,6 +60,10 @@ namespace XelaTech_Soporte
                 string nombreCompleto = nombresTec[random.Next(nombresTec.Length)] + " " + apellidosTec[random.Next(apellidosTec.Length)];
                 EspecialidadTecnico especialidad = (EspecialidadTecnico)random.Next(1, 4);
                 EstadoTecnico estado = (EstadoTecnico)random.Next(1, 4);
+                while (estado == EstadoTecnico.Ocupado)
+                {
+                    estado = (EstadoTecnico)random.Next(1, 4);
+                }
                 xelaTech.IngresarTecnico(new Tecnico(nombreCompleto, especialidad, estado));
             }
             Console.ForegroundColor = ConsoleColor.Cyan;

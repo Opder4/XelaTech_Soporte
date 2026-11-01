@@ -107,6 +107,12 @@ namespace XelaTech_Soporte
             solicitudPendiente.TecnicoAsignado = tecnicoDisponible;
             solicitudPendiente.ActualizarEstado(EstadoSolicitud.Asignado);
             tecnicoDisponible.TrabajosActivos++;
+            int indiceDia = ObtenerIndiceDiaActual();
+            if (indiceDia >= 0 && indiceDia <= 5)
+            {
+                int indiceTecnico = xelaTech.ListaTecnicos.IndexOf(tecnicoDisponible);
+                xelaTech.CargaSemanal[indiceTecnico, indiceDia] += 1;
+            }
             if (tecnicoDisponible.TrabajosActivos < 3)
             {
                 tecnicoDisponible.Estado = EstadoTecnico.Disponible;

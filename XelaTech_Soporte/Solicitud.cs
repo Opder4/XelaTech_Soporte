@@ -38,6 +38,8 @@ namespace XelaTech_Soporte
 
         private double manoDeObra;
 
+        private double costoTotal;
+
         public Solicitud(Cliente cliente, Equipo equipo, string descripcionProblema, PrioridadSolicitud prioridad)
         {
             Cliente = cliente;
@@ -50,6 +52,7 @@ namespace XelaTech_Soporte
             HistorialEstados.Push(EstadoActual);
             RepuestosUsados = new List<Repuesto>();
             ManoDeObra = 0;
+            CostoTotal = 0;
         }
 
         public void MostrarDetalles()
@@ -184,11 +187,6 @@ namespace XelaTech_Soporte
             }
         }
 
-        public double CalcularTotal()
-        {
-            return 0; // Por definir función
-        }
-
         public double ManoDeObra
         {
             get { return manoDeObra; }
@@ -265,6 +263,12 @@ namespace XelaTech_Soporte
         {
             get { return codigo; }
             set { codigo = value; }
+        }
+
+        public double CostoTotal
+        {
+            get { return costoTotal; }
+            set { costoTotal = value; }
         }
     }
 }

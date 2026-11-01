@@ -1669,5 +1669,15 @@ namespace XelaTech_Soporte
             }
             return numeroFinal;
         }
+
+        internal static int ObtenerIndiceDiaActual()
+        {
+            int dia = (int)DateTime.Now.DayOfWeek;
+            if (dia == 0)
+            {
+                return -1;
+            }
+            return dia - 1;
+        }
     }
 }

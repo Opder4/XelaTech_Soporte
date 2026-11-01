@@ -28,6 +28,8 @@ namespace XelaTech_Soporte
 
         private double calificacionPromedio;
 
+        private List<double> calificaciones = new List<double>();
+
         public Tecnico(string nombre, EspecialidadTecnico especialidad, EstadoTecnico estado)
         {
             NombreCompleto = nombre;
@@ -35,6 +37,7 @@ namespace XelaTech_Soporte
             Estado = estado;
             TrabajosActivos = 0;
             ServiciosFinalizados = 0;
+            calificaciones = new List<double>();
             CalificacionPromedio = 0;
         }
 
@@ -98,25 +101,29 @@ namespace XelaTech_Soporte
             }
         }
 
-        public void AsignarTrabajo()
+        public List<double> Calificaciones
         {
-            // Por confirmar entrada y proceso
-        }
-
-        public void FinalizarTrabajo()
-        {
-            // Por confirmar entrada y proceso
-        }
-
-        public void ActualizarCalificacion()
-        {
-            // Por confirmar entrada y proceso
+            get { return calificaciones; }
+            set { calificaciones = value; }
         }
 
         public double CalificacionPromedio
         {
             get { return calificacionPromedio; }
-            set { calificacionPromedio = value; }
+            set { if (calificaciones.Count <= 0 || calificaciones == null)
+                {
+                    calificacionPromedio = 0;
+                }
+            else
+                {
+                    double sumaCalificaiones = 0;
+                    foreach (double calificacion in calificaciones)
+                    {
+                        sumaCalificaiones += calificacion;
+                    }
+                    calificacionPromedio = sumaCalificaiones/calificaciones.Count;
+                }
+                        }
         }
 
         public string Prefijo

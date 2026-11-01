@@ -26,7 +26,9 @@ namespace XelaTech_Soporte
 
         private int[,] matrizCargaSemanal;
 
-		private int[] calificaciones;
+		private List<double> calificaciones = new List<double>();
+
+		private double ingresosTotales;
 
 		public XelaTech()
 		{
@@ -36,7 +38,8 @@ namespace XelaTech_Soporte
 			colaNormal = new Queue<Solicitud>();
 			colaUrgente = new Queue<Solicitud>();
 			matrizCargaSemanal = new int[0, 6];
-			calificaciones = new int[5];
+			calificaciones = new List<double>();
+			IngresosTotales = 0;
 		}
 
 		public void IngresarCliente(Cliente nuevoCliente)
@@ -52,7 +55,7 @@ namespace XelaTech_Soporte
             nuevoTecnico.Codigo = codigoUnico;
             listaTecnicos.Add(nuevoTecnico);
 			int filasActuales = matrizCargaSemanal.GetLength(0);
-			int[,] nuevaMatrizCargaSemanal = new int[filasActuales, 6];
+			int[,] nuevaMatrizCargaSemanal = new int[filasActuales + 1, 6];
 			for (int i = 0; i < filasActuales; i++)
 			{
 				for (int j = 0; j < 6; j++)
@@ -106,19 +109,19 @@ namespace XelaTech_Soporte
             listaRepuestos.Add(nuevoRepuesto);
 		}
 
-		public int[] Calificaciones
-		{
-			get { return calificaciones; }
-			set { calificaciones = value; }
-		}
-
 		public int[,] CargaSemanal
 		{
 			get { return matrizCargaSemanal; }
 			set { matrizCargaSemanal = value; }
 		}
 
-		public List<Repuesto> ListaRepuestos
+        public List<double> Calificaciones
+        {
+            get { return calificaciones; }
+            set { calificaciones = value; }
+        }
+
+        public List<Repuesto> ListaRepuestos
 		{
 			get { return listaRepuestos; }
 			set { listaRepuestos = value; }
@@ -159,5 +162,11 @@ namespace XelaTech_Soporte
 			get { return listaTodasSolicitudes; }
 			set { listaTodasSolicitudes = value; }
 		}
+
+        public double IngresosTotales
+        {
+            get { return ingresosTotales; }
+            set { ingresosTotales = value; }
+        }
     }
 }

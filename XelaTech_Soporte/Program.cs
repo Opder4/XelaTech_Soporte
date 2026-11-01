@@ -92,7 +92,7 @@ namespace XelaTech_Soporte
 
                         break;
                     case 9:
-
+                        ModuloReportes.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 10:
                         ModuloGenerarDatosDePrueba.IniciarModulo(Sistema_XelaTech_Soporte);
