@@ -119,7 +119,7 @@ namespace XelaTech_Soporte
             }
             else
             {
-                int posionCliente = ValidarNumerico(1, ListaDeClientes, xelaTech, xelaTech.ListaClientes.Count);
+                int posionCliente = ValidarNumericoMenusGrandes(3, ListaDeClientes, xelaTech, xelaTech.ListaClientes.Count);
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine();
@@ -219,7 +219,7 @@ namespace XelaTech_Soporte
             }
             else
             {
-                int posionCliente = ValidarNumerico(1, ListaDeClientes, xelaTech, xelaTech.ListaClientes.Count);
+                int posionCliente = ValidarNumericoMenusGrandes(3, ListaDeClientes, xelaTech, xelaTech.ListaClientes.Count);
                 Console.WriteLine();
                 MenuModificacionCliente(xelaTech.ListaClientes[posionCliente - 1]);
             }

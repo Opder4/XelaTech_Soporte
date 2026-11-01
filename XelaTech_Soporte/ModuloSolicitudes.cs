@@ -88,7 +88,7 @@ namespace XelaTech_Soporte
                 LimpiarConsola();
                 return;
             }
-            int posicionCliente = ValidarNumerico(1, () => ModuloClientes.ListaDeClientes(xelaTech), xelaTech.ListaClientes.Count);
+            int posicionCliente = ValidarNumericoMenusGrandes(3, () => ModuloClientes.ListaDeClientes(xelaTech), xelaTech.ListaClientes.Count);
             Cliente clienteSeleccionado = xelaTech.ListaClientes[posicionCliente - 1];
             List<Equipo> equiposCliente = xelaTech.ListaEquipos.Where(equipo => equipo.Propietario == clienteSeleccionado).ToList();
             if (equiposCliente.Count == 0)
@@ -100,7 +100,7 @@ namespace XelaTech_Soporte
                 LimpiarConsola();
                 return;
             }
-            int posicionEquipo = ValidarNumerico(1, () => {
+            int posicionEquipo = ValidarNumericoMenusGrandes(3, () => {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("===================================");
                 Console.WriteLine("        EQUIPOS DEL CLIENTE         ");
@@ -134,6 +134,7 @@ namespace XelaTech_Soporte
             Console.WriteLine();
             Console.WriteLine("Se registró la solicitud (RECIBIDA).");
             nuevaSolicitud.ActualizarEstado(EstadoSolicitud.EnEspera);
+            nuevaSolicitud.Cliente.SolicitudesRegistradas += 1;
             Console.ResetColor();
             LimpiarConsola();
         }
@@ -149,7 +150,7 @@ namespace XelaTech_Soporte
                 LimpiarConsola();
                 return;
             }
-            int posicion = ValidarNumerico(1, () => ListaDeSolicitudes(xelaTech), xelaTech.ListaTodasSolicitudes.Count);
+            int posicion = ValidarNumericoMenusGrandes(3, () => ListaDeSolicitudes(xelaTech), xelaTech.ListaTodasSolicitudes.Count);
             Solicitud solicitud = xelaTech.ListaTodasSolicitudes[posicion - 1];
             if (solicitud.EstadoActual == EstadoSolicitud.Entregada || solicitud.EstadoActual == EstadoSolicitud.Cancelada)
             {
@@ -303,6 +304,7 @@ namespace XelaTech_Soporte
             {
                 double costoManoObra = ValidarPrecio("Ingrese el costo de Mano de Obra para esta reparación", 8);
                 solicitud.ManoDeObra = costoManoObra;
+                solicitud.TecnicoAsignado.TrabajosActivos -= 1;
             }
             solicitud.ActualizarEstado(siguienteEstado);
             Console.ForegroundColor = ConsoleColor.Green;
@@ -323,7 +325,7 @@ namespace XelaTech_Soporte
                 LimpiarConsola();
                 return;
             }
-            int posicion = ValidarNumerico(1, () => ListaDeSolicitudes(xelaTech), xelaTech.ListaTodasSolicitudes.Count);
+            int posicion = ValidarNumericoMenusGrandes(3, () => ListaDeSolicitudes(xelaTech), xelaTech.ListaTodasSolicitudes.Count);
             Solicitud solicitud = xelaTech.ListaTodasSolicitudes[posicion - 1];
             if (solicitud.EstadoActual == EstadoSolicitud.Cancelada || solicitud.EstadoActual == EstadoSolicitud.ListaParaEntregar || solicitud.EstadoActual == EstadoSolicitud.Entregada)
             {
@@ -371,7 +373,7 @@ namespace XelaTech_Soporte
                 LimpiarConsola();
                 return;
             }
-            int posicion = ValidarNumerico(1, () => ListaDeSolicitudes(xelaTech), xelaTech.ListaTodasSolicitudes.Count);
+            int posicion = ValidarNumericoMenusGrandes(3, () => ListaDeSolicitudes(xelaTech), xelaTech.ListaTodasSolicitudes.Count);
             Solicitud solicitud = xelaTech.ListaTodasSolicitudes[posicion - 1];
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;

@@ -309,7 +309,7 @@ namespace XelaTech_Soporte
                 }
                 else
                 {
-                    posicionEquipo = ValidarNumerico(1, ListaDeLaptos, xelaTech, cantidadEquipos);
+                    posicionEquipo = ValidarNumericoMenusGrandes(1, ListaDeLaptos, xelaTech, cantidadEquipos);
                 }
             }
             else if (opcionMenu == 2)
@@ -328,7 +328,7 @@ namespace XelaTech_Soporte
                 }
                 else
                 {
-                    posicionEquipo = ValidarNumerico(1, ListaDePC, xelaTech, cantidadEquipos);
+                    posicionEquipo = ValidarNumericoMenusGrandes(1, ListaDePC, xelaTech, cantidadEquipos);
                 }
             }
             else if (opcionMenu == 3)
@@ -347,7 +347,7 @@ namespace XelaTech_Soporte
                 }
                 else
                 {
-                    posicionEquipo = ValidarNumerico(1, ListaDeImpresoras, xelaTech, cantidadEquipos);
+                    posicionEquipo = ValidarNumericoMenusGrandes(1, ListaDeImpresoras, xelaTech, cantidadEquipos);
                 }
             }
             else if (opcionMenu == 4)

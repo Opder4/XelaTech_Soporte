@@ -116,7 +116,7 @@ namespace XelaTech_Soporte
             }
             else
             {
-                int posicionTecnico = ValidarNumerico(1, ListaDeTecnicos, xelaTech, xelaTech.ListaTecnicos.Count);
+                int posicionTecnico = ValidarNumericoMenusGrandes(1, ListaDeTecnicos, xelaTech, xelaTech.ListaTecnicos.Count);
                 MostrarInformacionTecnico(xelaTech, posicionTecnico);
             }
         }
@@ -170,7 +170,7 @@ namespace XelaTech_Soporte
                         break;
                 }
             }
-            else if (tecnicoSeleccionado.Estado == EstadoTecnico.Disponible)
+            else if (tecnicoSeleccionado.Estado == EstadoTecnico.Disponible && tecnicoSeleccionado.TrabajosActivos <= 0)
             {
                 Console.WriteLine();
                 Console.WriteLine();

@@ -112,7 +112,7 @@ namespace XelaTech_Soporte
             }
             else
             {
-                int posicionRepuesto = ValidarNumerico(1, ListaDeRepuestos, xelaTech, xelaTech.ListaRepuestos.Count);
+                int posicionRepuesto = ValidarNumericoMenusGrandes(1, ListaDeRepuestos, xelaTech, xelaTech.ListaRepuestos.Count);
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine();
@@ -141,7 +141,7 @@ namespace XelaTech_Soporte
 
         public static void MenuAgregar(XelaTech xelaTech)
         {
-            int opcion = ValidarNumerico(1, () => {
+            int opcion = ValidarNumericoMenusGrandes(3, () => {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("===================================");
                 Console.WriteLine("        AGREGAR EXISTENCIAS        ");
@@ -149,7 +149,8 @@ namespace XelaTech_Soporte
                 Console.ResetColor();
                 ListaDeRepuestos(xelaTech);
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine($"\n{xelaTech.ListaRepuestos.Count + 1}. Salir sin agregar");
+                Console.WriteLine();
+                Console.WriteLine($"{xelaTech.ListaRepuestos.Count + 1}. Salir sin agregar");
                 Console.ResetColor();
             }, xelaTech.ListaRepuestos.Count + 1);
             if (opcion == xelaTech.ListaRepuestos.Count + 1) return;

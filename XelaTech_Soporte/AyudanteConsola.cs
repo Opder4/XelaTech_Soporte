@@ -775,6 +775,93 @@ namespace XelaTech_Soporte
             return numeroFinal;
         }
 
+        internal static int ValidarNumericoMenusGrandes(int limiteCaracteres, Action menuMostrar, int rangoValido)
+        {
+            bool numeroConfirmado = false;
+            int numeroFinal = 0;
+            while (!numeroConfirmado)
+            {
+                Console.Clear();
+                menuMostrar();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine();
+                Console.Write(" Ingresar: ");
+                Console.ResetColor();
+                StringBuilder sb = new StringBuilder(limiteCaracteres);
+                do
+                {
+                    ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+                    if (teclaInfo.Key == ConsoleKey.Enter && sb.Length > 0)
+                    {
+                        if (int.TryParse(sb.ToString(), out int numeroConvertido))
+                        {
+                            if (numeroConvertido >= 1 && numeroConvertido <= rangoValido)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine();
+                                Console.WriteLine();
+                                Console.Write("Confirmar el número ");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.Write(numeroConvertido);
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write(" (Yes/No): ");
+                                Console.ResetColor();
+                                string respuesta = Console.ReadLine().ToLower().Trim();
+                                if (respuesta == "yes")
+                                {
+                                    numeroFinal = numeroConvertido;
+                                    numeroConfirmado = true;
+                                    Console.Clear();
+                                    break;
+                                }
+                                else if (respuesta == "no")
+                                {
+                                    Mostrar("Reiniciando número", 1);
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine();
+                                    Console.WriteLine("Elección inválida");
+                                    Console.ResetColor();
+                                    Mostrar("Reiniciando número", 1);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
+                    {
+                        sb.Remove(sb.Length - 1, 1);
+                        Console.Write("\b \b");
+                    }
+                    if (sb.Length < limiteCaracteres)
+                    {
+                        if (char.IsDigit(teclaInfo.KeyChar))
+                        {
+                            if (teclaInfo.KeyChar == '0')
+                            {
+                                if (sb.Length > 0)
+                                {
+                                    sb.Append('0');
+                                    Console.Write('0');
+                                }
+                            }
+                            else
+                            {
+                                sb.Append(teclaInfo.KeyChar);
+                                Console.Write(teclaInfo.KeyChar);
+                            }
+                        }
+                    }
+                } while (true);
+            }
+            return numeroFinal;
+        }
+
         internal static int ValidarNumericoSinLimpiarConsola(int tamanoRequerido, Action menuMostrar, int rangoValido)
         {
             bool numeroConfirmado = false;
@@ -1007,6 +1094,93 @@ namespace XelaTech_Soporte
                         Console.Write("\b \b");
                     }
                     if (sb.Length < tamanoRequerido)
+                    {
+                        if (char.IsDigit(teclaInfo.KeyChar))
+                        {
+                            if (teclaInfo.KeyChar == '0')
+                            {
+                                if (sb.Length > 0)
+                                {
+                                    sb.Append('0');
+                                    Console.Write('0');
+                                }
+                            }
+                            else
+                            {
+                                sb.Append(teclaInfo.KeyChar);
+                                Console.Write(teclaInfo.KeyChar);
+                            }
+                        }
+                    }
+                } while (true);
+            }
+            return numeroFinal;
+        }
+
+        internal static int ValidarNumericoMenusGrandes<T>(int limiteCaracteres, Action<T> menuMostrar, T parametroMenu, int rangoValido)
+        {
+            bool numeroConfirmado = false;
+            int numeroFinal = 0;
+            while (!numeroConfirmado)
+            {
+                Console.Clear();
+                menuMostrar(parametroMenu);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine();
+                Console.Write(" Ingresar: ");
+                Console.ResetColor();
+                StringBuilder sb = new StringBuilder(limiteCaracteres);
+                do
+                {
+                    ConsoleKeyInfo teclaInfo = Console.ReadKey(intercept: true);
+                    if (teclaInfo.Key == ConsoleKey.Enter && sb.Length > 0)
+                    {
+                        if (int.TryParse(sb.ToString(), out int numeroConvertido))
+                        {
+                            if (numeroConvertido >= 1 && numeroConvertido <= rangoValido)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine();
+                                Console.WriteLine();
+                                Console.Write("Confirmar el número ");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.Write(numeroConvertido);
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write(" (Yes/No): ");
+                                Console.ResetColor();
+                                string respuesta = Console.ReadLine().ToLower().Trim();
+                                if (respuesta == "yes")
+                                {
+                                    numeroFinal = numeroConvertido;
+                                    numeroConfirmado = true;
+                                    Console.Clear();
+                                    break;
+                                }
+                                else if (respuesta == "no")
+                                {
+                                    Mostrar("Reiniciando número", 1);
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine();
+                                    Console.WriteLine("Elección inválida");
+                                    Console.ResetColor();
+                                    Mostrar("Reiniciando número", 1);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (teclaInfo.Key == ConsoleKey.Backspace && sb.Length > 0)
+                    {
+                        sb.Remove(sb.Length - 1, 1);
+                        Console.Write("\b \b");
+                    }
+                    if (sb.Length < limiteCaracteres)
                     {
                         if (char.IsDigit(teclaInfo.KeyChar))
                         {
@@ -1494,26 +1668,6 @@ namespace XelaTech_Soporte
                 } while (true);
             }
             return numeroFinal;
-        }
-
-        public static void Colores(int opcion)
-        {
-            switch (opcion)
-            {
-                case 1:
-                    string reset = "\u001b[0m";
-                    break;
-                case 2:
-                    string rojo = "\u001b[31m";
-                    break;
-                case 3:
-                    string verde = "\u001b[32m";
-                    break;
-                case 4:
-                    string azul = "\u001b[34m";
-                    break;
-            }
-            
         }
     }
 }

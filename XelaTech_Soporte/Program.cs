@@ -95,7 +95,7 @@ namespace XelaTech_Soporte
 
                         break;
                     case 10:
-
+                        ModuloGenerarDatosDePrueba.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 11:
                         Salir();
