@@ -86,7 +86,7 @@ namespace XelaTech_Soporte
                         ModuloAtencionDeSolicitudes.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 7:
-
+                        ModuloOrdenamientos.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 8:
 
