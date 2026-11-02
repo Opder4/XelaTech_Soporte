@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static XelaTech_Soporte.AyudanteConsola;
@@ -73,7 +74,7 @@ namespace XelaTech_Soporte
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"{i + 1}. ");
                 Console.ResetColor();
-                Console.Write($"ID: {solicitud.Codigo} | Cliente: {solicitud.Cliente.NombreCompleto} | Estado: {solicitud.EstadoActual}");
+                Console.Write($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {solicitud.Codigo} | {ColorConsola.Verde}Cliente:{ColorConsola.Reset} {solicitud.Cliente.NombreCompleto} | {ColorConsola.Azul}Estado:{ColorConsola.Reset} {solicitud.ObtenerEstadoSolicitud()}");
             }
         }
 
@@ -112,10 +113,27 @@ namespace XelaTech_Soporte
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write($"{i + 1}. ");
                     Console.ResetColor();
-                    Console.Write($"Marca: {equiposCliente[i].Marca} | ID: ({equiposCliente[i].Codigo})");
+                    Console.Write($"{ColorConsola.Rojo}Marca:{ColorConsola.Reset} {equiposCliente[i].Marca} | {ColorConsola.Verde}ID:{ColorConsola.Reset} ({equiposCliente[i].Codigo})");
                 }
             }, equiposCliente.Count);
             Equipo equipoSeleccinado = equiposCliente[posicionEquipo - 1];
+            bool yaEstaEnUnaSolicitud = false;
+            foreach (Solicitud solicitud in xelaTech.ListaTodasSolicitudes)
+            {
+                if (solicitud.Equipo == equipoSeleccinado)
+                {
+                    yaEstaEnUnaSolicitud = true;
+                    break;
+                }
+            }
+            if (yaEstaEnUnaSolicitud == true)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine();
+                Console.WriteLine("Este equipo ya está en una solicitud");
+                LimpiarConsola();
+                return;
+            }
             string descripcion = ValidarTexto("Ingrese la descripción del problema: ", 100);
             int posicionPrioridad = ValidarNumerico(1, () => {
                 Console.ForegroundColor = ConsoleColor.Magenta;
@@ -156,7 +174,7 @@ namespace XelaTech_Soporte
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine();
-                Console.WriteLine($"La solicitud ya se encuentra {solicitud.EstadoActual} y su proceso ha finalizado.");
+                Console.WriteLine($"La solicitud ya se encuentra {solicitud.ObtenerEstadoSolicitud()} y su proceso ha finalizado.");
                 Console.ResetColor();
                 LimpiarConsola();
                 return;
@@ -182,7 +200,7 @@ namespace XelaTech_Soporte
                 Console.WriteLine();
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine($"Estado Actual: {solicitud.EstadoActual}");
+                Console.WriteLine($"Estado Actual: {solicitud.ObtenerEstadoSolicitud()}");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine();
                 Console.WriteLine($"1. Avanzar al siguiente paso: {siguienteEstado}");
@@ -356,7 +374,7 @@ namespace XelaTech_Soporte
             solicitud.ActualizarEstado(siguienteEstado);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
-            Console.WriteLine($"La solicitud ha avanzado a: {siguienteEstado}");
+            Console.WriteLine($"La solicitud ha avanzado a {ObtenerEstadoSolicitud(siguienteEstado)}");
             Console.ResetColor();
             LimpiarConsola();
         }
@@ -378,7 +396,7 @@ namespace XelaTech_Soporte
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine();
-                Console.WriteLine($"No se puede deshacer una solicitud que está en estado {solicitud.EstadoActual}.");
+                Console.WriteLine($"No se puede deshacer una solicitud que está en estado {solicitud.ObtenerEstadoSolicitud()}.");
                 Console.ResetColor();
                 LimpiarConsola();
                 return;
@@ -387,7 +405,7 @@ namespace XelaTech_Soporte
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine();
-                Console.WriteLine($"No se puede deshacer el estado, ya que no hay ningún estado anterior a {solicitud.EstadoActual}.");
+                Console.WriteLine($"No se puede deshacer el estado, ya que no hay ningún estado anterior a {solicitud.ObtenerEstadoSolicitud()}.");
                 Console.ResetColor();
                 LimpiarConsola();
                 return;
@@ -404,7 +422,7 @@ namespace XelaTech_Soporte
             solicitud.DeshacerEstado();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
-            Console.WriteLine($"Se ha deshecho el último estado. El estado actual es ahora {solicitud.EstadoActual}.");
+            Console.WriteLine($"Se ha deshecho el último estado. El estado actual es ahora {solicitud.ObtenerEstadoSolicitud()}.");
             Console.ResetColor();
             LimpiarConsola();
         }

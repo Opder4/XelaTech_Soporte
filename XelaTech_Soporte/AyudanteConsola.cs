@@ -1679,5 +1679,32 @@ namespace XelaTech_Soporte
             }
             return dia - 1;
         }
+
+        internal static class ColorConsola
+        {
+            public const string Reset = "\u001b[0m";
+            public const string Rojo = "\u001b[31m";
+            public const string Verde = "\u001b[32m";
+            public const string Amarillo = "\u001b[33m";
+            public const string Azul = "\u001b[34m";
+            public const string Magenta = "\u001b[35m";
+            public const string Cyan = "\u001b[36m";
+        }
+
+        public static string ObtenerEstadoSolicitud(EstadoSolicitud estado)
+        {
+            switch (estado)
+            {
+                case EstadoSolicitud.Recibida: return "Recibida";
+                case EstadoSolicitud.EnEspera: return "En Espera";
+                case EstadoSolicitud.Asignado: return "Asignado";
+                case EstadoSolicitud.EnDiagnostico: return "En Diagnóstico";
+                case EstadoSolicitud.EnReparacion: return "En Reparación";
+                case EstadoSolicitud.ListaParaEntregar: return "Lista para Entregar";
+                case EstadoSolicitud.Entregada: return "Entregada";
+                case EstadoSolicitud.Cancelada: return "Cancelada";
+                default: return estado.ToString();
+            }
+        }
     }
 }

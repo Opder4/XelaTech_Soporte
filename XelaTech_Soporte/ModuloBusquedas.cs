@@ -50,8 +50,8 @@ namespace XelaTech_Soporte
             Console.WriteLine();
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("1. Búsqueda Binaria: Cliente por ID (Ej. CLI-001)");
-            Console.WriteLine("2. Búsqueda Binaria: Repuesto por ID (Ej. REP-001)");
+            Console.WriteLine("1. Búsqueda Binaria: Cliente por ID");
+            Console.WriteLine("2. Búsqueda Binaria: Repuesto por ID");
             Console.WriteLine("3. Búsqueda Secuencial: Técnico por Nombre");
             Console.WriteLine("4. Búsqueda Secuencial: Equipo por Marca");
             Console.WriteLine("5. Regresar al Menú Principal");

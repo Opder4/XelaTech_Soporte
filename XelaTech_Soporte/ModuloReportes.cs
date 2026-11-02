@@ -89,7 +89,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Solicitud solicitud in xelaTech.ListaTodasSolicitudes.Where(solicitud => solicitud.Prioridad == PrioridadSolicitud.Urgente && (solicitud.EstadoActual == EstadoSolicitud.Recibida || solicitud.EstadoActual == EstadoSolicitud.EnEspera)))
             {
-                Console.WriteLine($"ID: {solicitud.Codigo} | Cliente: {solicitud.Cliente.NombreCompleto} | Equipo: {solicitud.Equipo.ObtenerTipoDeEquipo()}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {solicitud.Codigo} | {ColorConsola.Verde}Cliente:{ColorConsola.Reset} {solicitud.Cliente.NombreCompleto} | {ColorConsola.Azul}Equipo:{ColorConsola.Reset} {solicitud.Equipo.ObtenerTipoDeEquipo()}");
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
@@ -97,7 +97,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Solicitud solicitud in xelaTech.ListaTodasSolicitudes.Where(solicitud => solicitud.Prioridad == PrioridadSolicitud.Normal && (solicitud.EstadoActual == EstadoSolicitud.Recibida || solicitud.EstadoActual == EstadoSolicitud.EnEspera)))
             {
-                Console.WriteLine($"ID: {solicitud.Codigo} | Cliente: {solicitud.Cliente.NombreCompleto} | Equipo: {solicitud.Equipo.ObtenerTipoDeEquipo()}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {solicitud.Codigo} | {ColorConsola.Verde}Cliente:{ColorConsola.Reset} {solicitud.Cliente.NombreCompleto} | {ColorConsola.Azul}Equipo:{ColorConsola.Reset} {solicitud.Equipo.ObtenerTipoDeEquipo()}");
             }
             LimpiarConsola();
         }
@@ -117,7 +117,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Solicitud solicitud in xelaTech.ListaTodasSolicitudes.Where(solicitud => solicitud.EstadoActual == EstadoSolicitud.Asignado || solicitud.EstadoActual == EstadoSolicitud.EnDiagnostico || solicitud.EstadoActual == EstadoSolicitud.EnReparacion || solicitud.EstadoActual == EstadoSolicitud.ListaParaEntregar))
             {
-                Console.WriteLine($"ID: {solicitud.Codigo} | Estado: {solicitud.EstadoActual}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {solicitud.Codigo} | {ColorConsola.Verde}Estado:{ColorConsola.Reset} {solicitud.ObtenerEstadoSolicitud()}");
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
@@ -125,7 +125,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Solicitud solicitud in xelaTech.ListaTodasSolicitudes.Where(solicitud => solicitud.EstadoActual == EstadoSolicitud.Entregada))
             {
-                Console.WriteLine($"ID: {solicitud.Codigo} | Cliente: {solicitud.Cliente.NombreCompleto}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {solicitud.Codigo} | {ColorConsola.Verde}Cliente:{ColorConsola.Reset} {solicitud.Cliente.NombreCompleto}");
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
@@ -133,7 +133,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Solicitud solicitud in xelaTech.ListaTodasSolicitudes.Where(solicitud => solicitud.EstadoActual == EstadoSolicitud.Cancelada))
             {
-                Console.WriteLine($"ID: {solicitud.Codigo} | Cliente: {solicitud.Cliente.NombreCompleto}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {solicitud.Codigo} | {ColorConsola.Verde}Cliente:{ColorConsola.Reset} {solicitud.Cliente.NombreCompleto}");
             }
             LimpiarConsola();
         }
@@ -153,7 +153,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Tecnico tecnico in xelaTech.ListaTecnicos.Where(tecnico => tecnico.Estado == EstadoTecnico.Disponible))
             {
-                Console.WriteLine($"ID: {tecnico.Codigo} | Nombre: {tecnico.NombreCompleto} | Trabajos Actuales: {tecnico.TrabajosActivos}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {tecnico.Codigo} | {ColorConsola.Verde}Nombre:{ColorConsola.Reset} {tecnico.NombreCompleto} | {ColorConsola.Azul}Trabajos Actuales:{ColorConsola.Reset} {tecnico.TrabajosActivos}");
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
@@ -161,7 +161,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Tecnico tecnico in xelaTech.ListaTecnicos.Where(tecnico => tecnico.Estado == EstadoTecnico.Inactivo || tecnico.TrabajosActivos >= 3))
             {
-                Console.WriteLine($"ID: {tecnico.Codigo} | Nombre: {tecnico.NombreCompleto} | Estado Actual: {tecnico.Estado}");
+                Console.WriteLine($"{ColorConsola.Reset}ID:{ColorConsola.Reset} {tecnico.Codigo} | {ColorConsola.Verde}Nombre:{ColorConsola.Reset} {tecnico.NombreCompleto} | {ColorConsola.Azul}Estado Actual:{ColorConsola.Reset} {tecnico.Estado}");
             }
             LimpiarConsola();
         }
@@ -256,7 +256,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Repuesto repuesto in xelaTech.ListaRepuestos.Where(repuesto => repuesto.Existencia == 0))
             {
-                Console.WriteLine($"ID: {repuesto.Codigo} | Nombre: {repuesto.Nombre} | Mínimo Requerido: {repuesto.ExistenciaMinima}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {repuesto.Codigo} | {ColorConsola.Verde}Nombre:{ColorConsola.Reset} {repuesto.Nombre} | {ColorConsola.Azul}Mínimo Requerido:{ColorConsola.Reset} {repuesto.ExistenciaMinima}");
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
@@ -264,7 +264,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             foreach (Repuesto repuesto in xelaTech.ListaRepuestos.Where(repuesto => repuesto.Existencia > 0 && repuesto.Existencia <= repuesto.ExistenciaMinima))
             {
-                Console.WriteLine($"ID: {repuesto.Codigo} | Nombre: {repuesto.Nombre} | Existencia Actual: {repuesto.Existencia} | Mínimo Requerido: {repuesto.ExistenciaMinima}");
+                Console.WriteLine($"{ColorConsola.Rojo}ID:{ColorConsola.Reset} {repuesto.Codigo} | {ColorConsola.Verde}Nombre:{ColorConsola.Reset} {repuesto.Nombre} | {ColorConsola.Azul}Existencia Actual:{ColorConsola.Reset} {repuesto.Existencia} | Mínimo Requerido: {repuesto.ExistenciaMinima}");
             }
             LimpiarConsola();
         }

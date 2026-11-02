@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
+using static XelaTech_Soporte.AyudanteConsola;
 namespace XelaTech_Soporte
 {
     public enum PrioridadSolicitud { Normal = 1, Urgente = 2 };
@@ -62,7 +62,7 @@ namespace XelaTech_Soporte
             Console.ResetColor();
             Console.Write(Codigo);
             Console.WriteLine();
-            Console.Write("Cliente: ");
+            Console.Write($"{ColorConsola.Azul}Cliente:{ColorConsola.Reset} ");
             Console.ResetColor();
             Console.Write(Cliente.NombreCompleto + $" | {Cliente.Telefono} | {Cliente.Codigo}");
             Console.WriteLine();
@@ -89,7 +89,7 @@ namespace XelaTech_Soporte
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Estado de la Solicitud: ");
             Console.ResetColor();
-            Console.Write(EstadoActual);
+            Console.Write(ObtenerEstadoSolicitud());
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Técnico Asinado: ");
@@ -139,7 +139,7 @@ namespace XelaTech_Soporte
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write($"{numeracion}°: ");
                     Console.ResetColor();
-                    Console.Write(estado);
+                    Console.Write(ObtenerEstadoSolicitud(estado));
                     numeracion++;
                 }
             }
@@ -176,6 +176,38 @@ namespace XelaTech_Soporte
         {
             EstadoActual = nuevoEstado;
             HistorialEstados.Push(nuevoEstado);
+        }
+
+        public string ObtenerEstadoSolicitud()
+        {
+            switch (EstadoActual)
+            {
+                case EstadoSolicitud.Recibida: return "Recibida";
+                case EstadoSolicitud.EnEspera: return "En Espera";
+                case EstadoSolicitud.Asignado: return "Asignado";
+                case EstadoSolicitud.EnDiagnostico: return "En Diagnóstico";
+                case EstadoSolicitud.EnReparacion: return "En Reparación";
+                case EstadoSolicitud.ListaParaEntregar: return "Lista para Entregar";
+                case EstadoSolicitud.Entregada: return "Entregada";
+                case EstadoSolicitud.Cancelada: return "Cancelada";
+                default: return EstadoActual.ToString();
+            }
+        }
+
+        public string ObtenerEstadoSolicitud(EstadoSolicitud estado)
+        {
+            switch (estado)
+            {
+                case EstadoSolicitud.Recibida: return "Recibida";
+                case EstadoSolicitud.EnEspera: return "En Espera";
+                case EstadoSolicitud.Asignado: return "Asignado";
+                case EstadoSolicitud.EnDiagnostico: return "En Diagnóstico";
+                case EstadoSolicitud.EnReparacion: return "En Reparación";
+                case EstadoSolicitud.ListaParaEntregar: return "Lista para Entregar";
+                case EstadoSolicitud.Entregada: return "Entregada";
+                case EstadoSolicitud.Cancelada: return "Cancelada";
+                default: return estado.ToString();
+            }
         }
 
         public void DeshacerEstado()
