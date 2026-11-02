@@ -89,7 +89,7 @@ namespace XelaTech_Soporte
                         ModuloOrdenamientos.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 8:
-
+                        ModuloBusquedas.IniciarModulo(Sistema_XelaTech_Soporte);
                         break;
                     case 9:
                         ModuloReportes.IniciarModulo(Sistema_XelaTech_Soporte);
