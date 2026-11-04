@@ -203,7 +203,7 @@ namespace XelaTech_Soporte
                 Console.WriteLine($"Estado Actual: {solicitud.ObtenerEstadoSolicitud()}");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine();
-                Console.WriteLine($"1. Avanzar al siguiente paso: {siguienteEstado}");
+                Console.WriteLine($"1. Avanzar al siguiente paso: {ObtenerEstadoSolicitud(siguienteEstado)}");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("2. Cancelar esta solicitud (Estado: Cancelada)");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -306,7 +306,6 @@ namespace XelaTech_Soporte
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine();
                             Console.WriteLine($"Se separaron {cantidad} '{repuestoSeleccionado.Nombre}'(s) para esta reparación.");
-                            repuestoSeleccionado.CantidadUtilizada += cantidad;
                             Console.ResetColor();
                             LimpiarConsola();
                         }
@@ -316,6 +315,7 @@ namespace XelaTech_Soporte
                 foreach (Repuesto repuesto in repuestosTemporales)
                 {
                     repuesto.Existencia -= 1;
+                    repuesto.CantidadUtilizada += 1;
                     solicitud.RepuestosUsados.Add(repuesto);
                 }
             }
@@ -361,8 +361,12 @@ namespace XelaTech_Soporte
                     double ventaRepuestosUsados = 0;
                     foreach (Repuesto repuesto in solicitud.RepuestosUsados)
                     {
-                        preciosRepuestosUsados += repuesto.CostoUnitario;
-                        ventaRepuestosUsados += repuesto.PrecioVenta;
+                        double conseguidoPorRepuesto = 0;
+                        conseguidoPorRepuesto = (repuesto.CostoUnitario * repuesto.CantidadUtilizada);
+                        preciosRepuestosUsados += conseguidoPorRepuesto;
+                        conseguidoPorRepuesto = 0;
+                        conseguidoPorRepuesto = (repuesto.PrecioVenta * repuesto.CantidadUtilizada);
+                        ventaRepuestosUsados += conseguidoPorRepuesto;
                     }
                     gananciaRepuestosUsados = ventaRepuestosUsados - preciosRepuestosUsados;
                 }

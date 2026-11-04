@@ -109,21 +109,24 @@ namespace XelaTech_Soporte
 
         public double CalificacionPromedio
         {
-            get { return calificacionPromedio; }
-            set { if (calificaciones.Count <= 0 || calificaciones == null)
+            get {
+                if (calificaciones.Count <= 0 || calificaciones == null)
                 {
                     calificacionPromedio = 0;
+                    return calificacionPromedio;
                 }
-            else
+                else
                 {
                     double sumaCalificaiones = 0;
                     foreach (double calificacion in calificaciones)
                     {
                         sumaCalificaiones += calificacion;
                     }
-                    calificacionPromedio = sumaCalificaiones/calificaciones.Count;
+                    calificacionPromedio = sumaCalificaiones / calificaciones.Count;
+                    return calificacionPromedio;
                 }
-                        }
+            }
+            set { calificacionPromedio = value; }
         }
 
         public string Prefijo

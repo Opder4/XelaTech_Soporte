@@ -126,6 +126,18 @@ namespace XelaTech_Soporte
             {
                 Console.Write("Q. " + ManoDeObra);
             }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Costo Total: ");
+            Console.ResetColor();
+            if (CostoTotal == 0)
+            {
+                Console.Write("Aún no se ha completado el servicio");
+            }
+            else
+            {
+                Console.Write("Q. " + CostoTotal);
+            }
         }
 
         public void MostrarHistorialDeEstados()
