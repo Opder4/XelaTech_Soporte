@@ -61,6 +61,10 @@ namespace XelaTech_Soporte
         private static void BuscarClienteBinaria(XelaTech xelaTech)
         {
             string idBuscado = ValidarAlfanumerico("Ingrese el ID del Cliente a buscar (Ej. CLI-001): ", 7).ToUpper();
+            if (xelaTech.ListaClientes.Count > 0)
+            {
+                OrdenarClientesPorIdQuickSort(xelaTech.ListaClientes, 0, xelaTech.ListaClientes.Count - 1);
+            }
             int inicio = 0;
             int fin = xelaTech.ListaClientes.Count - 1;
             Cliente clienteEncontrado = null;
@@ -103,9 +107,43 @@ namespace XelaTech_Soporte
             LimpiarConsola();
         }
 
+        private static void OrdenarClientesPorIdQuickSort(List<Cliente> lista, int inicio, int fin)
+        {
+            if (inicio < fin)
+            {
+                int indiceParticion = ParticionarClientesPorId(lista, inicio, fin);
+                OrdenarClientesPorIdQuickSort(lista, inicio, indiceParticion - 1);
+                OrdenarClientesPorIdQuickSort(lista, indiceParticion + 1, fin);
+            }
+        }
+
+        private static int ParticionarClientesPorId(List<Cliente> lista, int inicio, int fin)
+        {
+            string pivote = lista[fin].Codigo;
+            int i = inicio - 1;
+            for (int j = inicio; j < fin; j++)
+            {
+                if (string.Compare(lista[j].Codigo, pivote) < 0)
+                {
+                    i++;
+                    Cliente temp = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = temp;
+                }
+            }
+            Cliente tempFinal = lista[i + 1];
+            lista[i + 1] = lista[fin];
+            lista[fin] = tempFinal;
+            return i + 1;
+        }
+
         private static void BuscarRepuestoBinaria(XelaTech xelaTech)
         {
             string idBuscado = ValidarAlfanumerico("Ingrese el ID del Repuesto a buscar (Ej. REP-001): ", 7).ToUpper();
+            if (xelaTech.ListaRepuestos.Count > 0)
+            {
+                OrdenarRepuestosPorIdQuickSort(xelaTech.ListaRepuestos, 0, xelaTech.ListaRepuestos.Count - 1);
+            }
             int inicio = 0;
             int fin = xelaTech.ListaRepuestos.Count - 1;
             Repuesto repuestoEncontrado = null;
@@ -146,6 +184,36 @@ namespace XelaTech_Soporte
                 Console.ResetColor();
             }
             LimpiarConsola();
+        }
+
+        private static void OrdenarRepuestosPorIdQuickSort(List<Repuesto> lista, int inicio, int fin)
+        {
+            if (inicio < fin)
+            {
+                int indiceParticion = ParticionarRepuestosPorId(lista, inicio, fin);
+                OrdenarRepuestosPorIdQuickSort(lista, inicio, indiceParticion - 1);
+                OrdenarRepuestosPorIdQuickSort(lista, indiceParticion + 1, fin);
+            }
+        }
+
+        private static int ParticionarRepuestosPorId(List<Repuesto> lista, int inicio, int fin)
+        {
+            string pivote = lista[fin].Codigo;
+            int i = inicio - 1;
+            for (int j = inicio; j < fin; j++)
+            {
+                if (string.Compare(lista[j].Codigo, pivote) < 0)
+                {
+                    i++;
+                    Repuesto temp = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = temp;
+                }
+            }
+            Repuesto tempFinal = lista[i + 1];
+            lista[i + 1] = lista[fin];
+            lista[fin] = tempFinal;
+            return i + 1;
         }
 
         private static void BuscarTecnicoSecuencial(XelaTech xelaTech)

@@ -137,7 +137,7 @@ namespace XelaTech_Soporte
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write($"ID: {solicitudes.Codigo} | ");
                 Console.ResetColor();
-                Console.WriteLine($"Costo Total: Q. {solicitudes.CostoTotal:F2} | Estado: {solicitudes.EstadoActual}");
+                Console.WriteLine($"{ColorConsola.Verde}Costo Total: Q.{ColorConsola.Reset} {solicitudes.CostoTotal:F2} | {ColorConsola.Azul}Estado:{ColorConsola.Reset} {solicitudes.EstadoActual}");
             }
             LimpiarConsola();
         }
@@ -157,7 +157,7 @@ namespace XelaTech_Soporte
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write($"ID: {solicitud.Codigo} | ");
                 Console.ResetColor();
-                Console.WriteLine($"Fecha: {solicitud.FechaRecepcion} | Cliente: {solicitud.Cliente.NombreCompleto}");
+                Console.WriteLine($"{ColorConsola.Verde}Fecha:{ColorConsola.Reset} {solicitud.FechaRecepcion} | {ColorConsola.Azul}Cliente:{ColorConsola.Reset} {solicitud.Cliente.NombreCompleto}");
             }
             LimpiarConsola();
         }
@@ -177,7 +177,7 @@ namespace XelaTech_Soporte
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write($"ID: {repuesto.Codigo} | ");
                 Console.ResetColor();
-                Console.WriteLine($"Existencia: {repuesto.Existencia} | Nombre: {repuesto.Nombre}");
+                Console.WriteLine($"{ColorConsola.Verde}Existencia:{ColorConsola.Reset} {repuesto.Existencia} | {ColorConsola.Azul}Nombre:{ColorConsola.Reset} {repuesto.Nombre}");
             }
             LimpiarConsola();
         }
