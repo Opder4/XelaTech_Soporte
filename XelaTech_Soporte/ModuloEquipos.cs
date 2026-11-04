@@ -133,6 +133,18 @@ namespace XelaTech_Soporte
                 string accesorios = ValidarTexto("Ingrese los accesorios del equipo (Si aplica): ", 50);
                 string estadoFisico = ValidarTexto("Ingrese el estado físico del equipo: ", 50);
                 string numeroSerie = ValidarTexto("Ingrese el número de serie: ", 15);
+                while (xelaTech.NumerosDeSerie.Contains(numeroSerie.Trim().ToLower()))
+                {
+                    Console.WriteLine($"{ColorConsola.Rojo}Este número de serie ya existe{ColorConsola.Reset}");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine($"{ColorConsola.Verde}Presione ENTER para volver a intentar{ColorConsola.Reset}");
+                    Console.WriteLine();
+                    Console.ReadKey();
+                    Console.Clear();
+                    numeroSerie = ValidarTexto("Ingrese el número de serie: ", 15);
+                }
+                xelaTech.NumerosDeSerie.Add(numeroSerie);
                 string marca = ValidarTexto("Ingrese la marca: ", 15);
                 string modelo = ValidarTexto("Ingrese el modelo: ", 15);
                 if (tipoDeEquipo == TipoEquipo.Laptop)

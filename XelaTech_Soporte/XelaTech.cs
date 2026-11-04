@@ -30,6 +30,14 @@ namespace XelaTech_Soporte
 
 		private double ingresosTotales;
 
+		private List<string> numerosDeSerie = new List<string>();
+
+		public List<string> NumerosDeSerie
+        {
+			get { return numerosDeSerie; }
+			set { numerosDeSerie = value; }
+		}
+
 		public XelaTech()
 		{
 			listaClientes = new List<Cliente>();
@@ -39,6 +47,8 @@ namespace XelaTech_Soporte
 			colaUrgente = new Queue<Solicitud>();
 			matrizCargaSemanal = new int[0, 6];
 			calificaciones = new List<double>();
+			numerosDeSerie = new List<string>();
+			numerosDeSerie.Add("qwerty");
 			IngresosTotales = 0;
 		}
 

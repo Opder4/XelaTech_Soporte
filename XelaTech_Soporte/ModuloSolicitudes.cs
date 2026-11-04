@@ -306,6 +306,7 @@ namespace XelaTech_Soporte
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine();
                             Console.WriteLine($"Se separaron {cantidad} '{repuestoSeleccionado.Nombre}'(s) para esta reparación.");
+                            repuestoSeleccionado.CantidadUtilizada += cantidad;
                             Console.ResetColor();
                             LimpiarConsola();
                         }

@@ -86,6 +86,11 @@ namespace XelaTech_Soporte
                 Cliente propietario = xelaTech.ListaClientes[random.Next(xelaTech.ListaClientes.Count)];
                 TipoEquipo tipo = (TipoEquipo)random.Next(1, 4);
                 string serie = "SN-" + random.Next(10000, 99999);
+                while (xelaTech.NumerosDeSerie.Contains(serie.Trim().ToLower()))
+                {
+                    serie = "SN-" + random.Next(10000, 99999);
+                }
+                xelaTech.NumerosDeSerie.Add(serie);
                 string estadoFisico = problemas[random.Next(problemas.Length)];
                 if (tipo == TipoEquipo.Laptop)
                 {
